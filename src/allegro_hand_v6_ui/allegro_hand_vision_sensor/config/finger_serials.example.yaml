@@ -1,0 +1,8 @@
+# Example schema only; never preassign Reference machine serials to another hand.
+hand: right
+fingers:
+  thumb: null
+  index: null
+  middle: null
+  ring: null
+  pinky: null

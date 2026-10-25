@@ -1,0 +1,10 @@
+diagnostic_aggregator:
+  ros__parameters:
+    pub_rate: 1.0
+    path: 'Hand'
+    analyzers:
+      hand_status:
+        type: diagnostic_aggregator/GenericAnalyzer
+        path: 'Status'
+        timeout: 5.0
+        find_and_remove_prefix: ['allegro_hand_v6']

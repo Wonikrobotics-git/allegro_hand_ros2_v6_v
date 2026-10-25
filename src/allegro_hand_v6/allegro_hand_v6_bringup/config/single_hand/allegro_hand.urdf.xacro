@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_v6">
+    <xacro:arg name="model" default="v6_f" />
+    <xacro:arg name="hand" default="right" />
+    <xacro:arg name="ros2_control_hardware_type" default="hardware" />
+    <xacro:arg name="ah_prefix" default="" />
+    <xacro:arg name="io_interface_descriptor" default="modbus_tcp:192.168.1.100:502" />
+    <xacro:arg name="hand_id" default="1" />
+    <xacro:arg name="csv_logging" default="false" />
+    <xacro:arg name="csv_directory" default="./data_logs" />
+
+    <xacro:property name="model_arg" value="$(arg model)"/>
+    <xacro:property name="hand_arg" value="$(arg hand)"/>
+
+    <!-- v6_f (F model) -->
+    <xacro:if value="${model_arg == 'v6_f'}">
+        <xacro:if value="${hand_arg == 'right'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_f_right.urdf.xacro" />
+        </xacro:if>
+        <xacro:if value="${hand_arg == 'left'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_f_left.urdf.xacro" />
+        </xacro:if>
+    </xacro:if>
+
+    <!-- v6_v (V model) -->
+    <xacro:if value="${model_arg == 'v6_v'}">
+        <xacro:if value="${hand_arg == 'right'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_v_right.urdf.xacro" />
+        </xacro:if>
+        <xacro:if value="${hand_arg == 'left'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_v_left.urdf.xacro" />
+        </xacro:if>
+    </xacro:if>
+
+    <!-- Fallback if unspecified or legacy model value -->
+    <xacro:unless value="${model_arg == 'v6_f' or model_arg == 'v6_v'}">
+        <xacro:if value="${hand_arg == 'right'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_f_right.urdf.xacro" />
+        </xacro:if>
+        <xacro:if value="${hand_arg == 'left'}">
+            <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_f_left.urdf.xacro" />
+        </xacro:if>
+    </xacro:unless>
+
+    <xacro:include filename="$(find allegro_hand_v6_bringup)/config/single_hand/allegro_hand.ros2_control.xacro" />
+    <xacro:allegro_hand_v6_ros2_control name="allegro_hand" prefix="$(arg ah_prefix)" ros2_control_hardware_type="$(arg ros2_control_hardware_type)" io_interface_descriptor="$(arg io_interface_descriptor)" hand_id="$(arg hand_id)" csv_logging="$(arg csv_logging)" csv_directory="$(arg csv_directory)"/>
+</robot>

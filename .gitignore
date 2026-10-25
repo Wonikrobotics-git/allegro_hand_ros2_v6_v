@@ -1,0 +1,21 @@
+# ROS 2 workspace outputs
+/build/
+/install/
+/log/
+
+# Local recordings and camera assignments
+/data_logs/
+/src/allegro_hand_v6_ui/allegro_hand_vision_sensor/config/finger_serials.yaml
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store

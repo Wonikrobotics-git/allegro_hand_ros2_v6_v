@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>allegro_hand_v6_web_plot</name>
+  <version>1.0.0</version>
+  <description>Browser monitor for Allegro Hand V6 joint and sensor data.</description>
+  <maintainer email="jijang@wonik.com">WONIK Robotics</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>python3-websockets</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

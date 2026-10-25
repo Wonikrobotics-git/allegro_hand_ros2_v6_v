@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>allegro_hand_v6_hardware</name>
+  <version>1.0.0</version>
+  <description>The allegro_hand_v6_hardware package provides the ros2_control hardware interface for the Allegro Hand V6.</description>
+  
+  <maintainer email="wonikrobotics@gmail.com">Wonikrobotics-git</maintainer>
+  <maintainer email="jijang@wonik.com">('c')void</maintainer>
+  <license>BSD</license>
+  <url type="website">https://www.allegrohand.com/</url>
+  <url type="website">https://github.com/Wonikrobotics-git/</url>
+
+  <author email="jjieureka@gmail.com">('c')void</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>pkg-config</build_depend>
+  <build_depend>python3-dev</build_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>realtime_tools</depend>
+  <depend>diagnostic_updater</depend>
+  <depend>spdlog</depend>
+  <depend>libmodbus-dev</depend>
+  <depend>allegro_hand_utility</depend>
+  <depend>ament_cmake_python</depend>
+  <depend>pybind11_vendor</depend>
+  <build_depend>pybind11-dev</build_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>hardware_interface</test_depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+    <hardware_interface plugin="${prefix}/allegro_hand_v6_hardware.xml"/>
+  </export>
+</package>

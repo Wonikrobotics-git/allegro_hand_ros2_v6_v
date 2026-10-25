@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>allegro_hand_io</name>
+  <version>1.0.0</version>
+  <description>A C++ library that provides a hardware abstraction layer for communication with the Allegro Hand.</description>
+  
+  <maintainer email="wonikrobotics@gmail.com">Wonikrobotics-git</maintainer>
+  <maintainer email="jijang@wonik.com">('c')void</maintainer>
+  <license>BSD</license>
+  <url type="website">https://www.allegrohand.com/</url>
+  <url type="website">https://github.com/Wonikrobotics-git/</url>
+
+  <author email="jjieureka@gmail.com">('c')void</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>spdlog</depend>
+  <depend>boost</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,22 @@
+joint_names:
+  - joint00
+  - joint01
+  - joint02
+  - joint03
+  - joint10
+  - joint11
+  - joint12
+  - joint13
+  - joint20
+  - joint21
+  - joint22
+  - joint23
+  - joint30
+  - joint31
+  - joint32
+  - joint33
+  - joint40
+  - joint41
+  - joint42
+  - joint43
+position: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

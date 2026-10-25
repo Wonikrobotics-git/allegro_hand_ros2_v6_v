@@ -1,0 +1,340 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /TF1
+      Splitter Ratio: 0.5
+    Tree Height: 678
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        R10_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R11_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R12_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R13_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R14_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R20_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R21_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R22_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R23_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R24_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R30_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R31_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R32_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R33_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R34_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R40_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R41_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R42_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R43_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R44_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R50_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R51_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R52_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R53_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        R54_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        R10_Link:
+          Value: true
+        R11_Link:
+          Value: true
+        R12_Link:
+          Value: true
+        R13_Link:
+          Value: true
+        R14_Link:
+          Value: true
+        R20_Link:
+          Value: true
+        R21_Link:
+          Value: true
+        R22_Link:
+          Value: true
+        R23_Link:
+          Value: true
+        R24_Link:
+          Value: true
+        R30_Link:
+          Value: true
+        R31_Link:
+          Value: true
+        R32_Link:
+          Value: true
+        R33_Link:
+          Value: true
+        R34_Link:
+          Value: true
+        R40_Link:
+          Value: true
+        R41_Link:
+          Value: true
+        R42_Link:
+          Value: true
+        R43_Link:
+          Value: true
+        R44_Link:
+          Value: true
+        R50_Link:
+          Value: true
+        R51_Link:
+          Value: true
+        R52_Link:
+          Value: true
+        R53_Link:
+          Value: true
+        R54_Link:
+          Value: true
+        base_link:
+          Value: true
+        world:
+          Value: true
+      Marker Scale: 0.10000000149011612
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          base_link:
+            R10_Link:
+              R11_Link:
+                R12_Link:
+                  R13_Link:
+                    R14_Link:
+                      {}
+            R20_Link:
+              R21_Link:
+                R22_Link:
+                  R23_Link:
+                    R24_Link:
+                      {}
+            R30_Link:
+              R31_Link:
+                R32_Link:
+                  R33_Link:
+                    R34_Link:
+                      {}
+            R40_Link:
+              R41_Link:
+                R42_Link:
+                  R43_Link:
+                    R44_Link:
+                      {}
+            R50_Link:
+              R51_Link:
+                R52_Link:
+                  R53_Link:
+                    R54_Link:
+                      {}
+      Update Interval: 0
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 0.6346421837806702
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0.09841477125883102
+        Y: -0.007873755879700184
+        Z: 0.079568050801754
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.39020228385925293
+      Target Frame: <Fixed Frame>
+      Value: Current View
+      Yaw: 3.828585624694824
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 901
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000001560000032ffc0200000001fb000000100044006900730070006c006100790073010000003b0000032f000000c700ffffff000004730000032f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1487
+  X: 914
+  Y: 598

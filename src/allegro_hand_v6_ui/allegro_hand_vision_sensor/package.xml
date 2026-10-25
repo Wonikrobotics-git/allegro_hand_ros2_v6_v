@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>allegro_hand_vision_sensor</name>
+  <version>1.0.0</version>
+  <description>SDK-free VISION SENSOR capture and finger mapping.</description>
+  <maintainer email="support@wonikrobotics.com">Wonik Robotics</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>python3-setuptools</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>controller_manager_msgs</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-pyudev</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

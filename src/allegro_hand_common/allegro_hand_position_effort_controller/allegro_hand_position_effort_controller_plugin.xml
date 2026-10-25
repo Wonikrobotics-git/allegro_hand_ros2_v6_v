@@ -1,0 +1,20 @@
+<library path="allegro_hand_position_effort_controller">
+  <class name="allegro_hand_position_effort_controller/ForwardCommandController" type="allegro_hand_position_effort_controller::ForwardCommandController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    The forward command controller commands a group of joints in a given interface
+  </description>
+  </class>
+  <class name="allegro_hand_position_effort_controller/MultiInterfaceForwardCommandController"
+         type="allegro_hand_position_effort_controller::MultiInterfaceForwardCommandController" base_class_type="controller_interface::ControllerInterface">
+    <description>
+      MultiInterfaceForwardController ros2_control controller.
+    </description>
+  </class>
+
+  <class name="allegro_hand_position_effort_controller/PositionEffortController" type="allegro_hand_position_effort_controller::PositionEffortController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    The forward command controller commands a group of joints in a given interface
+  </description>
+  </class>
+  
+</library>

@@ -1,0 +1,5 @@
+config/finger_serials.yaml
+config/finger_serials.yaml.bak
+__pycache__/
+.pytest_cache/
+*.pyc

@@ -1,0 +1,23 @@
+<library path="allegro_hand_v6_hardware">
+    <class name="allegro_hand_v6_hardware/AllegroHandV6HardwareInterface"
+           type="allegro_hand_v6_hardware::AllegroHandV6HardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            ros2_control hardware interface for Allegro Hand V6 (5 fingers, 20 joints, Modbus TCP/RTU).
+        </description>
+    </class>
+    <class name="allegro_hand_v6_hardware/AllegroHandV6System"
+           type="allegro_hand_v6_hardware::AllegroHandV6HardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Alias for AllegroHandV6HardwareInterface matching bringup xacro plugin name.
+        </description>
+    </class>
+    <class name="allegro_hand_v6_hardware/AllegroHandPlexusHardwareInterface"
+           type="allegro_hand_v6_hardware::AllegroHandV6HardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Legacy compatibility alias for AllegroHandV6HardwareInterface.
+        </description>
+    </class>
+</library>

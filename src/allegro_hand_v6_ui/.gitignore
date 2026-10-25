@@ -1,0 +1,26 @@
+# ROS 2 / colcon build outputs
+build/
+install/
+log/
+
+# Python caches and test outputs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and OS metadata
+.vscode/
+.idea/
+*~
+.DS_Store
+
+# Web build outputs
+node_modules/
+dist/
+
+# Logs and test reports
+*.log
+TEST*.xml
+
+# Windows metadata
+Thumbs.db

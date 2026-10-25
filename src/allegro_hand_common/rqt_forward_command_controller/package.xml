@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model
+  href="http://download.ros.org/schema/package_format3.xsd"
+  schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rqt_forward_command_controller</name>
+  <version>1.0.0</version>
+  <description>Graphical frontend for interacting with forward_command_controller instances.</description>
+
+  <maintainer email="wonikrobotics@gmail.com">Wonikrobotics-git</maintainer>
+  <maintainer email="jijang@wonik.com">('c')void</maintainer>
+  <license>BSD</license>
+  <url type="website">https://www.allegrohand.com/</url>
+  <url type="website">https://github.com/Wonikrobotics-git/</url>
+
+  <author email="jjieureka@gmail.com">('c')void</author>
+
+  <exec_depend>control_msgs</exec_depend>
+  <exec_depend>controller_manager_msgs</exec_depend>
+  <exec_depend>python_qt_binding</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>python3-rospkg</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>rqt_gui</exec_depend>
+  <exec_depend>rqt_gui_py</exec_depend>
+  <exec_depend>qt_gui</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+    <rqt_gui plugin="${prefix}/plugin.xml"/>
+  </export>
+</package>

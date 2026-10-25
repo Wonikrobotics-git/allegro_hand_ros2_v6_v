@@ -1,0 +1,872 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="allegro_hand_v6_v_left">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.00335726845781368 0.0026819071319535 0.0527479851009032" rpy="0 0 0" />
+      <mass value="0.3729392773641271" />
+      <inertia ixx="0.0001401991474482444" ixy="7.615669326061994e-7" ixz="0.00001294872090816929" iyy="0.0002694200271766749" iyz="0.000001517924320830905" izz="0.0001623524757517039" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="thumb_0">
+    <inertial>
+      <origin xyz="0.0206545545542094 0.00228906453347326 -0.0113894052094567" rpy="0 0 0" />
+      <mass value="0.041" />
+      <inertia ixx="0.000004522927892888371" ixy="-6.466979853443749e-9" ixz="-2.060122323954497e-9" iyy="0.000002058623640056492" iyz="-6.774202762122453e-9" izz="0.000003558678156123870" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint00" type="revolute">
+    <origin xyz="-0.0515458963924166 -0.00186273945692087 0.0252954584404891" rpy="-3.12285472680256 -0.523294580872748 -3.14159265358979" />
+    <parent link="base_link" />
+    <child link="thumb_0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.0349065850398866" upper="1.65806278939461" effort="15" velocity="7" />
+  </joint>
+  <link name="thumb_1">
+    <inertial>
+      <origin xyz="0.000903408078965405 -0.00230073407076446 0.0258941733696041" rpy="0 0 0" />
+      <mass value="0.012" />
+      <inertia ixx="9.374528448669942e-7" ixy="-8.751681768875049e-9" ixz="9.495503040119643e-8" iyy="9.171796142803016e-7" iyz="1.081523667796297e-7" izz="5.999469526006780e-7" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint01" type="revolute">
+    <origin xyz="0.0166177655792122 -0.0120457406229079 -0.0117000000000028" rpy="-1.57079632679487 1.55204852359714 -1.60326086932927" />
+    <parent link="thumb_0" />
+    <child link="thumb_1" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-1.65806278939461" upper="1.65806278939461" effort="15" velocity="7" />
+  </joint>
+  <link name="thumb_2">
+    <inertial>
+      <origin xyz="0.0141346553085876 0.000911966128332252 -0.0116934452477629" rpy="0 0 0" />
+      <mass value="0.034" />
+      <inertia ixx="0.000001670549226444437" ixy="3.550024742560033e-7" ixz="-8.579116110253675e-9" iyy="0.000006289541467263361" iyz="1.395614727276173e-8" izz="0.000007357745074487210" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint02" type="revolute">
+    <origin xyz="-0.0121978560340643 -0.000228709800638667 0.0402" rpy="-1.5707963267949 -1.53833178426049 1.58954412999264" />
+    <parent link="thumb_1" />
+    <child link="thumb_2" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.30899693899575" effort="15" velocity="7" />
+  </joint>
+  <link name="thumb_3">
+    <inertial>
+      <origin xyz="0.0133463951025486 0.00105803440622768 -0.0113883651769553" rpy="0 0 0" />
+      <mass value="0.053" />
+      <inertia ixx="0.000002959151590749823" ixy="3.024859684555948e-7" ixz="-2.163665760129285e-8" iyy="0.000006290874781661661" iyz="3.031706323785797e-8" izz="0.000007920718060321053" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link04.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link04.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint03" type="revolute">
+    <origin xyz="0.0354812940922435 -0.00115228882652233 0" rpy="0 0 0" />
+    <parent link="thumb_2" />
+    <child link="thumb_3" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="thumb_4">
+    <inertial>
+      <origin xyz="-2.34449925458832e-05 0.000577353221379185 0.0161407852293453" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link05.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link05.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint0x1" type="fixed">
+    <origin xyz="0.0275025810407434 -0.000366951226078171 -0.0122012347771388" rpy="1.57079632679489 -1.49593647908414 1.5383317842605" />
+    <parent link="thumb_3" />
+    <child link="thumb_4" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+  <link name="thumb_s1">
+    <inertial>
+      <origin xyz="6.40130530108751e-05 -0.0013493871307755 -6.99729581388614e-05" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link06.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger01_Link06.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint0s1" type="fixed">
+    <origin xyz="-0.00107711689921003 0.0143780685687083 0.015732368354684" rpy="-3.07677728609239 -1.04598226467056 0" />
+    <parent link="thumb_4" />
+    <child link="thumb_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="index_0">
+    <inertial>
+      <origin xyz="-0.000764484859942745 0.0162490524561901 0.0173557918922071" rpy="0 0 0" />
+      <mass value="0.037" />
+      <inertia ixx="0.000005387057035401151" ixy="1.695684113347172e-8" ixz="4.906121893578020e-9" iyy="0.000003603715924518706" iyz="-3.488643295171778e-7" izz="0.000002723514462219962" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint10" type="revolute">
+    <origin xyz="-0.0448192191986822 -0.0143208213684815 0.0915000000000002" rpy="1.5707963267949 0 -3.10411021689813" />
+    <parent link="base_link" />
+    <child link="index_0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.383972435438752" upper="1.30899693899575" effort="15" velocity="7" />
+  </joint>
+  <link name="index_1">
+    <inertial>
+      <origin xyz="0.0212530322620754 0.00136096144128428 0.0116287269565078" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593558324006924" ixy="-1.970282185653782e-7" ixz="-8.711299802865436e-9" iyy="0.000006080308133005760" iyz="-1.318532028462902e-8" izz="0.000007091765764471417" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint11" type="revolute">
+    <origin xyz="-0.0122000000000267 0.0210000000000329 0.00489999999999654" rpy="1.5707963267949 0 1.5707963267949" />
+    <parent link="index_0" />
+    <child link="index_1" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.0698131700797732" upper="1.5707963267949" effort="15" velocity="7" />
+  </joint>
+  <link name="index_2">
+    <inertial>
+      <origin xyz="0.0212532697907621 0.00136096144084983 0.0116298269350517" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593558324079982" ixy="-1.970282185870207e-7" ixz="-8.711299799718653e-9" iyy="0.000006080308132661480" iyz="-1.318532027636947e-8" izz="0.000007091765764241444" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint12" type="revolute">
+    <origin xyz="0.0354997624711519 0 0" rpy="0 0 0" />
+    <parent link="index_1" />
+    <child link="index_2" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="index_3">
+    <inertial>
+      <origin xyz="0.00793267576848919 0.000565309811013725 0.0137727711265261" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="0.000001445219876586914" ixy="-2.401909679150402e-8" ixz="3.588556478549799e-7" iyy="0.000001629382114527495" iyz="-4.682616537803182e-9" izz="0.000001628863883610624" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link04.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link04.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint13" type="revolute">
+    <origin xyz="0.0354999999932715 0 0" rpy="0 0 0" />
+    <parent link="index_2" />
+    <child link="index_3" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="index_4">
+    <inertial>
+      <origin xyz="1.6622578232664e-05 5.21952842843787e-05 0.0161407329309221" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link05.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link05.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint1x1" type="fixed">
+    <origin xyz="0.014000237535577 0.00150000000031256 0.0124017911178675" rpy="1.57079632679492 -1.53331389010324 1.57079632679484" />
+    <parent link="index_3" />
+    <child link="index_4" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+  <link name="index_s1">
+    <inertial>
+      <origin xyz="-5.3765545884002e-05 -0.00134497070832532 -0.000134230445342526" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link06.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger02_Link06.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint1s1" type="fixed">
+    <origin xyz="-0.000520599592046908 0.0138826557450981 0.0157323683546841" rpy="3.14159265358524 0 0" />
+    <parent link="index_4" />
+    <child link="index_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="middle_0">
+    <inertial>
+      <origin xyz="-0.000764486902409142 0.0162490524497628 0.0173557887355275" rpy="0 0 0" />
+      <mass value="0.037" />
+      <inertia ixx="0.000005387056505545181" ixy="1.695698243976534e-8" ixz="4.905307331678994e-9" iyy="0.000003603716453946846" iyz="-3.488643130765598e-7" izz="0.000002723513618232489" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint20" type="revolute">
+    <origin xyz="-0.0149999999999994 -0.0132000000000003 0.103500000000001" rpy="1.5707963267949 0 -3.14159265358979" />
+    <parent link="base_link" />
+    <child link="middle_0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-1.13446401379631" upper="1.13446401379631" effort="15" velocity="7" />
+  </joint>
+  <link name="middle_1">
+    <inertial>
+      <origin xyz="0.0212530331047484 0.001360964045894 0.0116287584632904" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593558427532532" ixy="-1.970324345360486e-7" ixz="-8.710499956697674e-9" iyy="0.000006080308048919284" iyz="-1.318525422649901e-8" izz="0.000007091766229514695" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint21" type="revolute">
+    <origin xyz="-0.0122000000000265 0.0209999999999993 0.00490000000000103" rpy="1.5707963267949 0 1.5707963267949" />
+    <parent link="middle_0" />
+    <child link="middle_1" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.0698131700797732" upper="1.5707963267949" effort="15" velocity="7" />
+  </joint>
+  <link name="middle_2">
+    <inertial>
+      <origin xyz="0.0212530331046713 0.00136096404559121 0.0116287584635672" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593558427576263" ixy="-1.970324345255158e-7" ixz="-8.710499955603768e-9" iyy="0.000006080308048748868" iyz="-1.318525423502725e-8" izz="0.000007091766229408474" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint22" type="revolute">
+    <origin xyz="0.0355000000000005 0 0" rpy="0 0 0" />
+    <parent link="middle_1" />
+    <child link="middle_2" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="middle_3">
+    <inertial>
+      <origin xyz="0.0079324277379495 0.000565313263937784 0.0137709946008431" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="0.000001445217558118307" ixy="-2.401821229061740e-8" ixz="3.588562842410584e-7" iyy="0.000001629385042863027" iyz="-4.683432166773647e-9" izz="0.000001628862808964535" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link04.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link04.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint23" type="revolute">
+    <origin xyz="0.0354999999999995 0 0" rpy="0 0 0" />
+    <parent link="middle_2" />
+    <child link="middle_3" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="middle_4">
+    <inertial>
+      <origin xyz="1.85462631285636e-05 5.15357173010381e-05 0.0161407159401998" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link05.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link05.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint2x1" type="fixed">
+    <origin xyz="0.0139999999999992 0.00149999999999979 0.0124000000000278" rpy="0 -1.5707963267949 3.14159265358979" />
+    <parent link="middle_3" />
+    <child link="middle_4" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+  <link name="middle_s1">
+    <inertial>
+      <origin xyz="-3.3261715239423e-06 -0.00134603989174278 -0.000134250492148213" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link06.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger03_Link06.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint2s1" type="fixed">
+    <origin xyz="0 0.0138924135582032 0.015732368354684" rpy="3.14159265358979 0 0" />
+    <parent link="middle_4" />
+    <child link="middle_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="ring_0">
+    <inertial>
+      <origin xyz="-0.000764486068404582 0.016249051714172 0.0173557889400748" rpy="0 0 0" />
+      <mass value="0.037" />
+      <inertia ixx="0.000005387056400277668" ixy="1.695690033848342e-8" ixz="4.905143235034318e-9" iyy="0.000003603716226261830" iyz="-3.488645167198503e-7" izz="0.000002723514035358923" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint30" type="revolute">
+    <origin xyz="0.0148192191986825 -0.0143208213684817 0.0915000000000011" rpy="1.5707963267949 0 3.10411021689813" />
+    <parent link="base_link" />
+    <child link="ring_0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-1.30899693899575" upper="0.383972435438752" effort="15" velocity="7" />
+  </joint>
+  <link name="ring_1">
+    <inertial>
+      <origin xyz="0.0212530341666414 0.00136096431806925 0.0116288059103436" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593557648768789" ixy="-1.970346736289185e-7" ixz="-8.709649945764037e-9" iyy="0.000006080310573606085" iyz="-1.318613096532761e-8" izz="0.000007091768729718118" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint31" type="revolute">
+    <origin xyz="-0.012199999999999 0.0209999999999993 0.00490000000000129" rpy="1.5707963267949 0 1.5707963267949" />
+    <parent link="ring_0" />
+    <child link="ring_1" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.0698131700797732" upper="1.5707963267949" effort="15" velocity="7" />
+  </joint>
+  <link name="ring_2">
+    <inertial>
+      <origin xyz="0.021253034166653 0.00136096431809722 0.0116288059103483" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001593557648763502" ixy="-1.970346736271197e-7" ixz="-8.709649945698317e-9" iyy="0.000006080310573616374" iyz="-1.318613096563516e-8" izz="0.000007091768729721552" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint32" type="revolute">
+    <origin xyz="0.0355000000000005 0 0" rpy="0 0 0" />
+    <parent link="ring_1" />
+    <child link="ring_2" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="ring_3">
+    <inertial>
+      <origin xyz="0.0079324381335264 0.000565326546069308 0.0137709785365055" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="0.000001445219763588011" ixy="-2.401657746992799e-8" ixz="3.588553495105015e-7" iyy="0.000001629381941665964" iyz="-4.684887133597920e-9" izz="0.000001628863611413656" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link04.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link04.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint33" type="revolute">
+    <origin xyz="0.0354999999999995 0 0" rpy="0 0 0" />
+    <parent link="ring_2" />
+    <child link="ring_3" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="ring_4">
+    <inertial>
+      <origin xyz="2.04967903705174e-05 5.08127608284392e-05 0.0161407455542678" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link05.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link05.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint3x1" type="fixed">
+    <origin xyz="0.0139999999999991 0.00149999999999973 0.0124000000000268" rpy="-1.57079632679495 -1.53331389010324 -1.57079632679484" />
+    <parent link="ring_3" />
+    <child link="ring_4" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+  <link name="ring_s1">
+    <inertial>
+      <origin xyz="4.71170423196748e-05 -0.00134522002235505 -0.000134230601376545" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link06.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger04_Link06.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint3s1" type="fixed">
+    <origin xyz="0.000520599588839987 0.0138826557452185 0.015732368354684" rpy="3.14159265358979 0 0" />
+    <parent link="ring_4" />
+    <child link="ring_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="pinky_0">
+    <inertial>
+      <origin xyz="-0.00357449198362595 0.0158694422437865 0.0173557870185857" rpy="0 0 0" />
+      <mass value="0.037" />
+      <inertia ixx="0.000005327480527860260" ixy="3.209032588760876e-7" ixz="6.540980394953934e-8" iyy="0.000003663288609966151" iyz="-3.427147284448704e-7" izz="0.000002723514480622595" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint40" type="revolute">
+    <origin xyz="0.0444714502324283 -0.0165473302342995 0.076000000000001" rpy="1.5707963267949 0 3.06673280587903" />
+    <parent link="base_link" />
+    <child link="pinky_0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-1.30899693899575" upper="0.436332312998582" effort="15" velocity="7" />
+  </joint>
+  <link name="pinky_1">
+    <inertial>
+      <origin xyz="0.0212688766736735 0.00108413672657905 0.0116289224538041" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001589178162210275" ixy="-1.385497706277677e-7" ixz="-8.874006184651365e-9" iyy="0.000006084648196209765" iyz="-1.306788146647848e-8" izz="0.000007091730151156863" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint41" type="revolute">
+    <origin xyz="-0.0156612663177804 0.0185624550457146 0.00490000000000104" rpy="1.5707963267949 -0.0130228770687082 1.74532925199433" />
+    <parent link="pinky_0" />
+    <child link="pinky_1" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.0698131700797732" upper="1.5707963267949" effort="15" velocity="7" />
+  </joint>
+  <link name="pinky_2">
+    <inertial>
+      <origin xyz="0.0212688766736733 0.00108413672657862 0.0116289224538028" rpy="0 0 0" />
+      <mass value="0.033" />
+      <inertia ixx="0.000001589178162210294" ixy="-1.385497706277187e-7" ixz="-8.874006184638725e-9" iyy="0.000006084648196209713" iyz="-1.306788146648032e-8" izz="0.000007091730151156803" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint42" type="revolute">
+    <origin xyz="0.0354969897254881 -0.000462299068386607 0" rpy="0 0 0" />
+    <parent link="pinky_1" />
+    <child link="pinky_2" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="pinky_3">
+    <inertial>
+      <origin xyz="0.00793905100584616 0.000461977864262077 0.0137709575899547" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="0.000001444632414643191" ixy="-2.161338118942498e-8" ixz="3.587826358028095e-7" iyy="0.000001630013595496372" iyz="-9.368484134069973e-9" izz="0.000001628905345373698" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link04.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link04.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint43" type="revolute">
+    <origin xyz="0.0354969897254871 -0.000462299068385486 0" rpy="0 0 0" />
+    <parent link="pinky_2" />
+    <child link="pinky_3" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.174532925199433" upper="1.39626340159546" effort="15" velocity="7" />
+  </joint>
+  <link name="pinky_4">
+    <inertial>
+      <origin xyz="2.24414044933396e-05 4.99890966958582e-05 0.0161407697748446" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link05.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link05.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint4x1" type="fixed">
+    <origin xyz="0.01401834661294 0.00131755767973977 0.0124000000000229" rpy="-1.5707963267954 -1.49478605466818 -1.58381920386311" />
+    <parent link="pinky_3" />
+    <child link="pinky_4" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+  <link name="pinky_s1">
+    <inertial>
+      <origin xyz="7.41587543995476e-05 -0.00134425922045193 -0.000131562434194876" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link06.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Finger05_Link06.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint4s1" type="fixed">
+    <origin xyz="0.00105494960894303 0.0138523007401203 0.0157323683546841" rpy="-3.12840593222681 0.174039109447152 0" />
+    <parent link="pinky_4" />
+    <child link="pinky_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="palm_s1">
+    <inertial>
+      <origin xyz="-0.000358572813162598 0.00417122126854218 0.00295461537586577" rpy="0 0 0" />
+      <mass value="0.0331057704859923" />
+      <inertia ixx="0.000003588956585274145" ixy="1.117289978796072e-7" ixz="-6.906713150916334e-7" iyy="0.00001004749141897371" iyz="-1.173613469071704e-7" izz="0.000007267344389894835" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_01.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_01.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint5s1" type="fixed">
+    <origin xyz="-0.0221306803655762 -0.0285809044272525 0.0742452249901964" rpy="3.14159265358979 0 3.14159265358979" />
+    <parent link="base_link" />
+    <child link="palm_s1" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="palm_s2">
+    <inertial>
+      <origin xyz="-0.000836487692156971 0.00450552515892044 -0.00233431905167533" rpy="0 0 0" />
+      <mass value="0.0366810518598390" />
+      <inertia ixx="0.000004525779305943315" ixy="-5.398766476933467e-7" ixz="-6.838193883661557e-7" iyy="0.00001208569265518361" iyz="-5.181220489765878e-8" izz="0.000008744743388705964" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_02.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_02.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint5s2" type="fixed">
+    <origin xyz="0.0177687009927135 -0.0295572324734583 0.0531574496352091" rpy="3.14159265358979 0 3.14159265358979" />
+    <parent link="base_link" />
+    <child link="palm_s2" />
+    <axis xyz="0 0 0" />
+  </joint>
+  <link name="palm_s3">
+    <inertial>
+      <origin xyz="0.00396889374956595 0.00519333902634631 -0.00250253325291446" rpy="0 0 0" />
+      <mass value="0.0312739002900416" />
+      <inertia ixx="0.000003064464672918775" ixy="-3.249233279034103e-7" ixz="-4.110660862707149e-7" iyy="0.000008745320099839178" iyz="-5.938486397342410e-8" izz="0.000006573592101987544" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_03.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://allegro_hand_v6_description/meshes/v6_v/left/Palm_03.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint5s3" type="fixed">
+    <origin xyz="0.0163868843705003 -0.029833501503601 0.0217841784660166" rpy="3.14159265358979 0 3.14159265358979" />
+    <parent link="base_link" />
+    <child link="palm_s3" />
+    <axis xyz="0 0 0" />
+  </joint>
+</robot>

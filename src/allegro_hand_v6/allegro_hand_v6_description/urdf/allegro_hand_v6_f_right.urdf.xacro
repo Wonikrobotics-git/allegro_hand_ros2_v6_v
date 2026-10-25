@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_v6_f_right">
+  <xacro:include filename="$(find allegro_hand_v6_description)/urdf/allegro_hand_v6_f_right.urdf" />
+</robot>

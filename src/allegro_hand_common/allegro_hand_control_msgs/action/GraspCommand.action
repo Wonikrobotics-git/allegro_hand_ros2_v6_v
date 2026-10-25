@@ -1,0 +1,10 @@
+string command # home, ready, grasp_3, grasp_4, pinch_it, pinch_mt, envelop, off 
+float64 effort # desired envelop grasp torque. default(-1)
+---
+sensor_msgs/JointState state
+bool stalled      # True iff the gripper is exerting max effort and not moving
+bool reached_goal # True iff the gripper position has reached the commanded setpoint
+---
+sensor_msgs/JointState state
+bool stalled      # True iff the gripper is exerting max effort and not moving
+bool reached_goal # True iff the gripper position has reached the commanded setpoint

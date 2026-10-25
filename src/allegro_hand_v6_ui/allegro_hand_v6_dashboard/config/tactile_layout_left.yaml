@@ -1,0 +1,158 @@
+# Palm wire order: 15=upper (palm_center), 16=middle (palm_left), 17=bottom.
+# F-model PNG used for initial V-model UI placement. Replace image/coordinates for final V model.
+unit: hPa
+pressure_min: 1000.0
+pressure_max: 1200.0
+svg_width: 1322
+svg_height: 1190
+image_crop:
+- 0
+- 0
+- 1322
+- 1190
+image_scale: 1.0
+image_offset:
+- 0
+- 0
+sensors:
+- index: 0
+  name: palm_bottom
+  label: P3
+  group: Palm
+  frame_id: base_link
+  position:
+  - 0.025
+  - -0.01
+  - 0.018
+  normal:
+  - 0
+  - 0
+  - 1
+  svg:
+  - 899
+  - 1056
+  source_index: 17
+- index: 1
+  name: palm_center
+  label: P2
+  group: Palm
+  frame_id: base_link
+  position:
+  - 0.07
+  - 0.01
+  - 0.018
+  normal:
+  - 0
+  - 0
+  - 1
+  svg:
+  - 745
+  - 830
+  source_index: 15
+- index: 2
+  name: palm_left
+  label: P1
+  group: Palm
+  frame_id: base_link
+  position:
+  - 0.055
+  - -0.018
+  - 0.018
+  normal:
+  - 0
+  - 0
+  - 1
+  svg:
+  - 938
+  - 899
+  source_index: 16
+input_channel_count: 18
+canvas_width: 900
+canvas_height: 900
+# Fit the visible hand to the same height on both sides.
+hand_rect:
+- 65
+- 205
+- 770
+- 680
+vision_sensors:
+- finger: pinky
+  pressure_markers:
+  - {frame_id: R54_Link, position: [0.022, 0, 0.006], normal: [0, 0, 1]}
+  - {frame_id: R52_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  - {frame_id: R51_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  pressure_start: 12
+  pressure_positions: [[1070, 233], [1068, 434], [1068, 603]]
+  pressure_rotation: 0
+  card:
+  - 724
+  - 80
+  - 154
+  - 180
+  tip:
+  - 1070
+  - 233
+- finger: ring
+  pressure_markers:
+  - {frame_id: R44_Link, position: [0.022, 0, 0.006], normal: [0, 0, 1]}
+  - {frame_id: R42_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  - {frame_id: R41_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  pressure_start: 9
+  pressure_positions: [[926, 154], [923, 356], [923, 525]]
+  pressure_rotation: 0
+  card:
+  - 558
+  - 15
+  - 154
+  - 180
+  tip:
+  - 926
+  - 154
+- finger: middle
+  pressure_markers:
+  - {frame_id: R34_Link, position: [0.022, 0, 0.006], normal: [0, 0, 1]}
+  - {frame_id: R32_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  - {frame_id: R31_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  pressure_start: 6
+  pressure_positions: [[777, 92], [774, 301], [774, 473]]
+  pressure_rotation: 0
+  card:
+  - 392
+  - 8
+  - 154
+  - 180
+  tip:
+  - 777
+  - 92
+- finger: index
+  pressure_markers:
+  - {frame_id: R24_Link, position: [0.022, 0, 0.006], normal: [0, 0, 1]}
+  - {frame_id: R22_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  - {frame_id: R21_Link, position: [0.019, 0, 0.008], normal: [0, 0, 1]}
+  pressure_start: 3
+  pressure_positions: [[627, 153], [625, 357], [624, 526]]
+  pressure_rotation: 0
+  card:
+  - 226
+  - 35
+  - 154
+  - 180
+  tip:
+  - 627
+  - 153
+- finger: thumb
+  pressure_markers:
+  - {frame_id: R14_Link, position: [0.0125, 0.0217, 0.001], normal: [0, 0, 1]}
+  - {frame_id: R13_Link, position: [0.0069, 0.0119, 0.0109], normal: [0, -0.0375, 0.9993]}
+  - {frame_id: R12_Link, position: [0.0089, 0.0154, 0.011], normal: [0, -0.0375, 0.9993]}
+  pressure_start: 0
+  pressure_positions: [[97, 683], [195, 738], [331, 822]]
+  pressure_rotation: -56
+  card:
+  - 32
+  - 315
+  - 154
+  - 180
+  tip:
+  - 97
+  - 683

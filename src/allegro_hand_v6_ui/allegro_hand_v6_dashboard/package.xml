@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>allegro_hand_v6_dashboard</name>
+  <version>1.0.0</version>
+  <description>V6 dashboard for pressure and direct V4L2 vision sensor capture.</description>
+  <maintainer email="support@wonikrobotics.com">Wonik Robotics</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>pkg-config</buildtool_depend>
+
+  <build_depend>qtbase5-dev</build_depend>
+  <build_depend>libopencv-dev</build_depend>
+  <build_depend>libudev-dev</build_depend>
+
+  <depend>ament_index_cpp</depend>
+  <depend>rclcpp</depend>
+  <depend>rviz_common</depend>
+  <depend>rviz_default_plugins</depend>
+  <depend>rviz_rendering</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>yaml_cpp_vendor</depend>
+
+  <exec_depend>python3</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>allegro_hand_vision_sensor</exec_depend>
+  <exec_depend>allegro_hand_v6_description</exec_depend>
+  <exec_depend>libopencv-dev</exec_depend>
+  <exec_depend>libudev-dev</exec_depend>
+  <exec_depend>libqt5-core</exec_depend>
+  <exec_depend>libqt5-gui</exec_depend>
+  <exec_depend>libqt5-svg</exec_depend>
+  <exec_depend>libqt5-widgets</exec_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
