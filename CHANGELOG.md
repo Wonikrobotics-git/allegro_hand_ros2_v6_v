@@ -2,6 +2,10 @@
 
 Release versions follow semantic versioning (MAJOR.MINOR.PATCH) and use Git tags with a `v` prefix.
 
+## Unreleased
+
+- Credit shy0914 as a contributor in the README and commit metadata.
+
 ## [1.0.0] - 2026-10-26
 
 Initial GitHub release of the Allegro Hand V6 V software for Ubuntu 24.04 and ROS 2 Jazzy, based on the complete Jazzy source bundle dated 2026-10-22.

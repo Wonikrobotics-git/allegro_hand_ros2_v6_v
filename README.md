@@ -153,3 +153,9 @@ src/
 ```
 
 The F and V repositories share the same software and model assets. Use `model:=v6_v` for this V-model workflow; camera discovery and finger mapping are provided by `allegro_hand_vision_sensor`.
+
+## Contributors
+
+Maintained and released by [Wonikrobotics-official](https://github.com/Wonikrobotics-official).
+
+- [shy0914](https://github.com/shy0914) — development and documentation contributions.
