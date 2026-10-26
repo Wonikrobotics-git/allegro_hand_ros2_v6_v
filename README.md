@@ -1,37 +1,55 @@
-# Allegro Hand V6 V — ROS 2 Jazzy
+# 🖐️ Allegro Hand V6 V
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![ROS 2: Jazzy](https://img.shields.io/badge/ROS_2-Jazzy-22314E)](https://docs.ros.org/en/jazzy/)
+[![Ubuntu: 24.04](https://img.shields.io/badge/Ubuntu-24.04-E95420)](#installation)
+[![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-2563EB)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22C55E)](LICENSE)
 
-ROS 2 software for the **Allegro Hand V6 V**, a five-finger robotic hand with 20 actuated joints. This repository includes the hardware driver, robot models, controller bringup, and UI applications in one workspace.
+**Official ROS 2 software for the Allegro Hand V6 V.**
 
-**Version: 1.0.0** · **Ubuntu 24.04 LTS / ROS 2 Jazzy**
+Control a five-finger hand with **20 actuated joints**, visualize live feedback, and work with desktop pose tools and CSV recording. The hardware driver, robot models, bringup, and UI applications are included in one workspace for **Ubuntu 24.04 / ROS 2 Jazzy**.
 
-Release versions use semantic versioning and Git tags such as `v1.0.0`. See [CHANGELOG.md](CHANGELOG.md) for release history.
+[Installation & Build](#installation) · [Quick Start](#quick-start-without-hardware) · [Bringup Guide](src/allegro_hand_v6/allegro_hand_v6_bringup/README.md) · [UI Manual](src/allegro_hand_v6_ui/README.md)
 
-## F and V Models
+> [!IMPORTANT]
+> **V model:** complete camera-to-finger mapping during initial camera setup, then open the dashboard. Mapping is not needed for the mock preview.
+> For the V6 F, see the [F-model repository](https://github.com/Wonikrobotics-git/allegro_hand_ros2_v6_f).
 
-The F and V models share the same control software. Select the model that matches your physical hand when launching bringup:
+---
+
+## ✨ Key Features
+
+- **20-joint control** — ROS 2 hardware integration and controller bringup for left and right hands.
+- **Live dashboard** — view the 3D hand, joint feedback, and available pressure readings in one Qt application.
+- **Pose tools** — save joint poses, send selected poses, and run timed sequences from the desktop GUI.
+- **Camera-to-finger mapping** — assign camera serial numbers to fingers and display their images in the dashboard.
+- **Browser monitoring** — inspect joint plots and compatible sensor streams from a browser.
+- **CSV recording** — record joint positions, measured currents, and pressure values from the configured 500 Hz control loop.
+- **Mock preview** — explore the hand model and joint-state integration before connecting hardware.
+
+<a id="models"></a>
+
+## 🧩 F and V Models
+
+Both repositories share the same control software and model assets. Select the model that matches your hand:
 
 | Model | Bringup argument | Camera mapping |
 |---|---|---|
-| V6 F | `model:=v6_f` | **Not required.** Proceed directly to bringup and the UI. |
-| **V6 V** (this repository) | `model:=v6_v` | Follow the camera guide when using the finger cameras. |
+| [V6 F](https://github.com/Wonikrobotics-git/allegro_hand_ros2_v6_f) | `model:=v6_f` | Not required. |
+| **V6 V** · this repository | `model:=v6_v` | Required for initial assignment of camera images to fingers. |
 
-All examples below use the **V model, right hand**. For a left hand, use `hand:=left` in both bringup and the dashboard. For a physical V model, complete camera-to-finger mapping before opening the dashboard with its camera views.
+Examples below use the **V model, right hand**. For a left hand, use `hand:=left` consistently in bringup, the dashboard, and camera mapping where applicable.
 
-## Documentation
+---
 
-| Guide | Contents |
-|---|---|
-| [Bringup and hardware setup](src/allegro_hand_v6/allegro_hand_v6_bringup/README.md) | Ethernet setup, mock and physical operation, launch arguments, and controller checks. |
-| [UI usage](src/allegro_hand_v6_ui/README.md) | Dashboard, pose control GUI, browser monitor, and their ROS interfaces. |
-| [Dashboard manual](src/allegro_hand_v6_ui/allegro_hand_v6_dashboard/README.md) | Visualization, pressure display, layouts, and dashboard settings. |
-| [CSV recording guide (Korean)](src/allegro_hand_v6/allegro_hand_v6_bringup/CSV_LOGGING.md) | Recording options, data columns, and rate checks. |
-| [Validation record](VALIDATION.md) | Recorded build and mock checks, source refreshes, and verification scope. |
+<a id="installation"></a>
 
-## Installation
+## 🚀 Installation & Build
 
-Install ROS 2 Jazzy Desktop on Ubuntu 24.04 before continuing. The base packages and UI are included here; **build them together in this workspace**. The UI README also describes a separate UI distribution, whose overlay installation steps are unnecessary for this combined repository.
+Install **ROS 2 Jazzy Desktop on Ubuntu 24.04**, then build the base packages and UI together using the steps below.
+
+> [!NOTE]
+> This is a complete workspace. The UI manual also covers a separate UI distribution; use this README for installation of the combined repository.
 
 ### 1. Clone the Repository
 
@@ -68,16 +86,22 @@ colcon build --symlink-install --executor sequential --cmake-args -DBUILD_TESTIN
 source install/setup.bash
 ```
 
-Use Jazzy environments throughout. Load the following in **every terminal** used to run the hand or UI:
+### 4. Load the Environment
+
+Use the following in **every terminal** that runs bringup or a UI application:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
 source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
-## Quick Start Without Hardware
+---
 
-Start mock bringup in terminal 1:
+<a id="quick-start-without-hardware"></a>
+
+## 🧪 Quick Start Without Hardware
+
+**Terminal 1 — Start mock bringup**
 
 ```bash
 ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
@@ -85,7 +109,7 @@ ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
   ros2_control_hardware_type:=mock_components gui:=false
 ```
 
-Open the dashboard in terminal 2:
+**Terminal 2 — Open the dashboard**
 
 ```bash
 ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
@@ -93,11 +117,17 @@ ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
 
 The dashboard displays the robot model and joint feedback from bringup. Its `hand` argument selects the 2D hand layout; the 3D model comes from bringup. Physical pressure readings require a connected hand. Camera mapping is unnecessary for this mock check. For physical V-model cameras, follow the mapping steps below.
 
-## Run with a Physical Hand
+---
+
+<a id="run-with-a-physical-hand"></a>
+
+## 🦾 Run with a Physical Hand
 
 Follow the [hardware setup guide](src/allegro_hand_v6/allegro_hand_v6_bringup/README.md#hardware-setup) to connect power and Ethernet and configure the PC's network address. Stop mock bringup before starting the hardware driver.
 
-In terminal 1, use the actual IP address and port of your hand. The following command activates the physical hardware interface:
+**Terminal 1 — Start the hardware driver**
+
+Use the actual IP address and port of your hand. This command activates the physical hardware interface:
 
 ```bash
 ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
@@ -111,7 +141,9 @@ For a physical hand with cameras, complete [camera-to-finger mapping](#camera-to
 
 For pose saving, sequences, and browser plots, see [UI usage](src/allegro_hand_v6_ui/README.md#optional-pose-control-gui). Use the same hand setting and `ROS_DOMAIN_ID` across applications.
 
-## Camera-to-Finger Mapping
+<a id="camera-to-finger-mapping"></a>
+
+## 📷 Camera-to-Finger Mapping
 
 The V model uses camera serial numbers to assign images to fingers. For initial setup, start physical bringup as shown above and keep the dashboard closed. Review the mapping motion configuration before starting: **automatic mapping commands real joints and moves the hand through contact poses**.
 
@@ -135,7 +167,23 @@ ${XDG_CONFIG_HOME:-~/.config}/allegro_hand_vision_sensor/finger_serials.yaml
 
 Use the same OS user and hand setting for both applications. Verify the assignment after replacing a camera or changing hands. For device permissions, custom mapping files, and unresolved fingers, see the [camera capture and mapping guide](src/allegro_hand_v6_ui/README.md#camera-capture-and-finger-mapping).
 
-## Optional CSV Recording
+<a id="ui-applications"></a>
+
+## 🖥️ UI Applications
+
+| Application | What it does | Usage guide |
+|---|---|---|
+| **Dashboard** | Displays the live 3D hand and available sensor feedback. | [Dashboard manual](src/allegro_hand_v6_ui/allegro_hand_v6_dashboard/README.md) |
+| **Pose Control GUI** | Saves and sends 20-joint poses and runs pose sequences. | [Pose control](src/allegro_hand_v6_ui/README.md#optional-pose-control-gui) |
+| **Browser Monitor** | Plots joint data and compatible sensor inputs in a browser. | [Browser monitoring](src/allegro_hand_v6_ui/README.md#optional-browser-monitor) |
+
+Start the base controller before using these applications. The [UI manual](src/allegro_hand_v6_ui/README.md) describes topic requirements and configuration.
+
+---
+
+<a id="optional-csv-recording"></a>
+
+## 📊 CSV Data Recording
 
 Add the following arguments to the physical bringup command:
 
@@ -145,7 +193,11 @@ csv_logging:=true csv_directory:=./data_logs
 
 Recording is disabled by default. CSV files contain timestamps, status counters, 20 joint positions, 20 measured currents, and 18 pressure values. The configured control rate is **500 Hz**; actual acquisition rate depends on the device, transport, and PC. See the [CSV recording guide](src/allegro_hand_v6/allegro_hand_v6_bringup/CSV_LOGGING.md) for details.
 
-## Repository Layout
+---
+
+<a id="repository-layout"></a>
+
+## 📦 Repository Layout
 
 ```text
 src/
@@ -156,16 +208,44 @@ src/
 
 The F and V repositories share the same software and model assets. Use `model:=v6_v` for this V-model workflow; camera discovery and finger mapping are provided by `allegro_hand_vision_sensor`.
 
-## Contributors
+<a id="documentation"></a>
+
+## 📚 Documentation
+
+| Guide | Contents |
+|---|---|
+| [Bringup and hardware setup](src/allegro_hand_v6/allegro_hand_v6_bringup/README.md) | Ethernet setup, mock and physical operation, launch arguments, and controller checks. |
+| [UI usage](src/allegro_hand_v6_ui/README.md) | Dashboard, pose control GUI, browser monitor, and their ROS interfaces. |
+| [Dashboard manual](src/allegro_hand_v6_ui/allegro_hand_v6_dashboard/README.md) | Visualization, pressure display, layouts, and dashboard settings. |
+| [CSV recording guide (Korean)](src/allegro_hand_v6/allegro_hand_v6_bringup/CSV_LOGGING.md) | Recording options, data columns, and rate checks. |
+| [Validation record](VALIDATION.md) | Recorded build and mock checks, source refreshes, and verification scope. |
+
+Version **1.0.0** uses semantic versioning and Git tags such as `v1.0.0`. See the [changelog](CHANGELOG.md) for release history.
+
+---
+
+<a id="contributors"></a>
+
+## 🤝 Contributors
 
 Maintained and released by [Wonikrobotics-official](https://github.com/Wonikrobotics-official).
 
 - [shy0914](https://github.com/shy0914) — development and documentation contributions.
 
-## License
+<a id="license"></a>
+
+## 📄 License
 
 Licensed under the [MIT License](LICENSE), except where an individual file or package specifies another license. Existing copyright and license notices are retained, including BSD and Apache-2.0 notices.
 
 Copyright (c) 2026 WonikRobotics_official.
 
 See also the dashboard's [third-party notices](src/allegro_hand_v6_ui/allegro_hand_v6_dashboard/THIRD_PARTY_NOTICES.md) for its external libraries.
+
+<a id="useful-links"></a>
+
+## 🔗 Useful Links
+
+- [Allegro Hand website](https://www.allegrohand.com/)
+- [F-model repository](https://github.com/Wonikrobotics-git/allegro_hand_ros2_v6_f)
+- [V-model repository](https://github.com/Wonikrobotics-git/allegro_hand_ros2_v6_v)
