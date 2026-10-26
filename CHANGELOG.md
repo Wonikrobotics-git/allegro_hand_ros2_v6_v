@@ -4,6 +4,7 @@ Release versions follow semantic versioning (MAJOR.MINOR.PATCH) and use Git tags
 
 ## Unreleased
 
+- Add the MIT License and README license badge while preserving existing file and package license notices.
 - Credit shy0914 as a contributor in the README and commit metadata.
 
 ## [1.0.0] - 2026-10-26
