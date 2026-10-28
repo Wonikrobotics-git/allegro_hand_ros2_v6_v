@@ -4,6 +4,7 @@ Release versions follow semantic versioning (MAJOR.MINOR.PATCH) and use Git tags
 
 ## Unreleased
 
+- Align all operation guides with the combined workspace, correct CSV commands, and add English first-pose and V-camera diagnostic workflows.
 - Refresh the repository introduction and README with feature highlights, platform badges, and clearer navigation.
 - Add the MIT License and README license badge while preserving existing file and package license notices.
 - Credit shy0914 as a contributor in the README and commit metadata.

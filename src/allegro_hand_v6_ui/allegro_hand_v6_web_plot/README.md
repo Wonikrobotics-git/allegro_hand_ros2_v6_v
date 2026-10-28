@@ -1,5 +1,12 @@
 # Allegro Hand V6 Web Plot
 
+통합 배포본은 [루트 설치 안내](../../../README.md#installation)로 빌드한다. 모든 터미널에서 아래 환경을 불러온다.
+
+```bash
+source /opt/ros/jazzy/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
+```
+
 Allegro Hand V6의 관절 위치, 목표 위치, effort, 온도, 촉각 값을 웹 브라우저에서 실시간 확인하는 ROS 2 monitoring 패키지이다. Python bridge가 ROS 토픽을 수집해 WebSocket JSON으로 변환하고 정적 HTML 화면이 이를 그래프로 표시한다.
 
 ## 디렉터리 및 파일 구성
@@ -141,7 +148,7 @@ Browser는 받은 pressure 배열을 5개 손가락 group에 가능한 한 균�
 
 ```bash
 # 터미널 1
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left gui:=false
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right gui:=false
 
 # 터미널 2
 ros2 run allegro_hand_v6_web_plot web_plot_bridge

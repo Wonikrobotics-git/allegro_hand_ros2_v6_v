@@ -4,12 +4,11 @@
 
 ## 설치와 확인
 
-Ubuntu 24.04 / ROS 2 Jazzy 기준. 별도 기본 V6 패키지를 먼저 빌드한 뒤 [저장소 설치 안내](../README.md)에 따라 UI 전용 워크스페이스에 설치합니다. UI 패키지는 `src/allegro_hand_v6_ui` 안에 그대로 둡니다. 각 터미널에서 다음 환경을 불러옵니다.
+Ubuntu 24.04 / ROS 2 Jazzy 통합 배포본이다. [루트 설치 안내](../../../README.md#installation)를 따른다. 이 문서의 카메라 기능은 V 모델용이며 F 모델은 건너뛴다. 먼저 [USB 인식·권한·영상 확인](docs/CAMERA_SETUP.md)을 마친다. 각 터미널에서 다음 환경을 불러온다.
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
 ## 영상 취득
@@ -28,7 +27,7 @@ ros2 launch allegro_hand_vision_sensor vision_sensor.launch.py
 
 ```bash
 # 터미널 1: 실제 손과 컨트롤러 시작
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right
 ```
 
 손의 통신 주소가 기본값 `192.168.1.100:502`와 다르면 bringup에 `io_interface_descriptor`를 지정합니다. 예를 들어 `192.168.1.110`의 오른손은 다음과 같이 실행합니다.
@@ -42,9 +41,8 @@ ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=rig
 ```bash
 # 터미널 2: 카메라 캡처와 자동 매핑 시작
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
-ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=left
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
+ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=right
 ```
 
 `mapping.launch.py`는 기본적으로 접촉 기반 sweep 매핑을 실행하며, `mapping_sweep.launch.py`도 같은 동작과 옵션을 제공합니다. 왼손·오른손 모두 공통 설정인 `config/mapping_motion.yaml`의 각도를 준비 자세와 sweep 방향의 기준으로 사용합니다. 기본 `sweep_joints:=flex`에서는 엄지와 벌림 관절을 준비 자세로 이동한 뒤 검사할 손가락의 굽힘 관절을 접촉까지 점진적으로 움직입니다. 접촉, 추종 오차 한계 또는 `s_max`에 도달하면 멈춥니다. `hand: both`는 이 자세를 양손에 적용한다는 뜻이며, launch의 `hand:=left` 또는 `hand:=right`는 매핑 결과와 화면 표시 방향을 지정합니다. 기존 `mapping_motion_left.yaml`과 `mapping_motion_right.yaml`은 공통 파일을 가리키는 심볼릭 링크입니다. 각도를 바꾸려면 공통 파일 하나만 수정합니다. 매퍼는 실제 관절 위치 명령을 발행하므로 실행 전 접촉 자세를 확인합니다. 동작 설정은 설치된 패키지의 share 디렉터리에서 읽습니다. 설정을 수정했다면 패키지를 다시 빌드하거나 `motion_file:=/absolute/path/to/motion.yaml`을 전달합니다. 사용자 지정 파일도 `hand: both`로 양손에 적용할 수 있으며, `hand: left` 또는 `hand: right`인 기존 파일은 해당 손에만 적용됩니다. `DONE`과 저장 경로를 확인한 뒤 캡처를 종료합니다. `FAILED` 또는 `UNRESOLVED` 손가락이 있으면 카메라와 자세를 확인하고 다시 실행합니다.
@@ -86,6 +84,8 @@ ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=right
 ## 테스트
 
 ```bash
+cd ~/allegro_hand_ros2_v6_v
+colcon build --symlink-install --packages-up-to allegro_hand_vision_sensor --cmake-args -DBUILD_TESTING=ON
 colcon test --packages-select allegro_hand_vision_sensor
 colcon test-result --test-result-base build/allegro_hand_vision_sensor --verbose
 ```

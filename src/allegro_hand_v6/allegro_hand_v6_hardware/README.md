@@ -1,5 +1,7 @@
 # allegro_hand_v6_hardware
 
+현재 통합 배포본의 설치·실행은 [루트 README](../../../README.md#installation)와 [시작 안내](doc/startup_guide.md)를 따른다. 모든 명령은 저장소 루트에서 실행한다. 기본 빌드는 `BUILD_TESTING=OFF`이므로 테스트 실행 파일이 필요하면 먼저 의도적으로 테스트를 활성화해 빌드한다.
+
 `allegro_hand_v6_hardware` 패키지는 Wonik Robotics의 **Allegro Hand V6 (5손가락 20관절)**를 위한 `ros2_control` 하드웨어 인터페이스 및 전용 통신 SDK(`v6_sdk`)를 제공합니다.
 
 이 패키지는 `ros2_control` 프레임워크의 하드웨어 인터페이스 플러그인(`hardware_interface::SystemInterface`)으로 동작하며, ROS 2 제어기(Controller)와 실물 Allegro Hand V6 하드웨어(Modbus TCP/RTU) 간의 통신 브리지 역할을 수행합니다. 20개 관절의 위치(`position`) 및 토크(`effort`) 제어 인터페이스를 수출하고, 18개 촉각 센서 압력 및 BNO055 IMU 데이터를 실시간으로 수신 및 발행합니다.
@@ -97,10 +99,10 @@ source install/setup.bash
 
 ```bash
 # 1. SDK 통신, 피드백, 압력/IMU, 진단, 게인 R/W 단위 테스트
-/colcon_ws/install/allegro_hand_v6_hardware/lib/allegro_hand_v6_hardware/test_v6_sdk
+ros2 run allegro_hand_v6_hardware test_v6_sdk
 
 # 2. ros2_control 하드웨어 인터페이스 라이프사이클 및 플러그인 로드 단위 테스트
-/colcon_ws/install/allegro_hand_v6_hardware/lib/allegro_hand_v6_hardware/test_v6_hardware
+ros2 run allegro_hand_v6_hardware test_v6_hardware
 
 # 3. 실물 핸드 독립 모션 테스트 CLI
 ros2 run allegro_hand_v6_hardware test_sdk_motion
@@ -139,7 +141,7 @@ ros2 run allegro_hand_v6_hardware test_sdk_motion
 `ros2_control_node`와 제어기 스포너를 포함하는 런치 파일을 실행합니다. 상세 실행 예시는 `allegro_hand_v6_bringup` 패키지를 참조하십시오.
 
 ```bash
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py hand:=right ros2_control_hardware_type:=hardware io_interface_descriptor:=modbus_tcp:192.168.1.100:502
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right ros2_control_hardware_type:=hardware io_interface_descriptor:=modbus_tcp:192.168.1.100:502
 ```
 
 ### 6.3. 상태 모니터링 (Checking Status)
@@ -268,8 +270,8 @@ print(f"Torque Enabled: {diag.torque_enabled}")
 source install/setup.bash
 
 # 1. SDK 기본 기능 및 센서 데이터 읽기 검증
-python3 src/ros_pkgs/src/hands/allegro_hand_v6/allegro_hand_v6_hardware/test/test_sdk.py
+python3 src/allegro_hand_v6/allegro_hand_v6_hardware/test/test_sdk.py
 
 # 2. 5핑거 핑거 웨이브(Finger Wave) 연속 모션 테스트 (100 Hz 제어)
-python3 src/ros_pkgs/src/hands/allegro_hand_v6/allegro_hand_v6_hardware/test/test_sdk_motion.py --ip 192.168.1.100 --rate 100 --freq 8.0
+python3 src/allegro_hand_v6/allegro_hand_v6_hardware/test/test_sdk_motion.py --ip 192.168.1.100 --rate 100 --freq 8.0
 ```

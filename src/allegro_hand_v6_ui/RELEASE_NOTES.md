@@ -2,6 +2,8 @@
 
 Release date: **2026-10-22**.
 
+> Historical record of the earlier UI-only ZIP distribution. For the current combined F/V GitHub repository, use the [root installation guide](../../README.md#installation) and [current UI guide](README.md). The separate-workspace/archive instructions below are not the installation procedure for this repository.
+
 ## Platform and Installation
 
 - Ubuntu 24.04 LTS and ROS 2 Jazzy.

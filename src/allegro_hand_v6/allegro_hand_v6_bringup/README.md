@@ -50,7 +50,7 @@ ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
   gui:=false
 ```
 
-This activates the physical hardware interface. Pose commands move real joints. With the dashboard closed, follow the [camera capture and mapping guide](../../allegro_hand_v6_ui/README.md#camera-capture-and-finger-mapping) for initial V-model camera setup. Stop mapping/capture when finished, then start the dashboard separately:
+This activates the physical hardware interface. The position controller enables torque automatically; the supplied GUI Servo buttons do not control physical torque. Pose commands move real joints. With the dashboard closed, follow the [camera capture and mapping guide](../../allegro_hand_v6_ui/README.md#camera-capture-and-finger-mapping) for initial V-model camera setup. Stop mapping/capture when finished, then start the dashboard separately:
 
 ```bash
 ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
@@ -98,3 +98,7 @@ For connection failures, check the hand's power, cable, PC subnet, device IP/por
 Enable recording by adding `csv_logging:=true csv_directory:=./data_logs` to the physical bringup command. See [CSV_LOGGING.md (Korean)](CSV_LOGGING.md) for the format and acquisition-rate checks. Mock mode does not produce hardware CSV recordings.
 
 See the [UI guide](../../allegro_hand_v6_ui/README.md) for dashboard settings, pose control, browser monitoring, and input-topic requirements. Use the installation instructions in the repository root for this combined workspace.
+
+## First Pose and Session Shutdown
+
+Follow the [English pose walkthrough](../../allegro_hand_v6_ui/allegro_hand_v6_gui/README.md#first-pose-and-sequence) for baseline capture, a mock-only movement example, physical-pose prerequisites, and shutdown. GUI Stop/closure does not disable torque. V-model users should complete [USB camera checks](../../allegro_hand_v6_ui/allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) before mapping.

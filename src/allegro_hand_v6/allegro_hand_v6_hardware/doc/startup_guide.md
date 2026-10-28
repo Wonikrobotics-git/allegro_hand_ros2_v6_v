@@ -1,63 +1,25 @@
-# Allegro Hand V6 ROS 2 Quick Start Guide
+# Allegro Hand V6 Hardware Quick Start
 
-### 1. Create a ROS 2 Workspace
+For this combined source distribution, use the [root installation guide](../../../../README.md#installation). It contains the correct repository URL, Jazzy dependencies, and workspace build steps.
 
-```bash
-mkdir -p ~/allegro_ws/src
-```
-
-### 2. Install Required Dependencies
+Load the workspace in every terminal:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y \
-  ros-jazzy-xacro \
-  ros-jazzy-controller-manager \
-  ros-jazzy-joint-state-broadcaster \
-  ros-jazzy-joint-trajectory-controller \
-  libmodbus-dev \
-  libfmt-dev \
-  libspdlog-dev
+source /opt/ros/jazzy/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
-### 3. Clone Allegro Hand ROS 2 Repository
+1. Complete the [power/Ethernet setup](../../allegro_hand_v6_bringup/README.md#hardware-setup) and stop any mock bringup.
+2. Start the driver with the connected hand's actual model, side, and endpoint:
 
-```bash
-cd ~/allegro_ws/src
-git clone -b jazzy https://github.com/Wonikrobotics-git/allegro_hand_ros2.git
-```
-
-### 4. Build Workspace
-
-```bash
-cd ~/allegro_ws
-colcon build --symlink-install
-source install/setup.bash
-```
-
-### 5. Hardware Setup & Network Configuration
-
-1. Power on Allegro Hand V6 (24V DC).
-2. Connect the Ethernet cable between your PC and Allegro Hand V6.
-3. Configure your PC static IP to `192.168.1.x` (e.g., `192.168.1.10`, subnet mask `255.255.255.0`).
-4. Verify connection:
    ```bash
-   ping 192.168.1.100
+   ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
+     model:=v6_v hand:=right ros2_control_hardware_type:=hardware \
+     io_interface_descriptor:=modbus_tcp:192.168.1.100:502 gui:=false
    ```
 
-### 6. Start the ROS 2 Driver Node
+3. Check `ros2 control list_controllers` and `ros2 topic echo /joint_states --once` in another sourced terminal. Expect an active position controller and 20 joint positions.
+4. F-model users can open the dashboard directly. V-model users first complete [camera checks and mapping](../../../allegro_hand_v6_ui/allegro_hand_vision_sensor/docs/CAMERA_SETUP.md).
+5. Follow the [English pose walkthrough](../../../allegro_hand_v6_ui/allegro_hand_v6_gui/README.md#first-pose-and-sequence) for mock practice, validated physical poses, and session shutdown.
 
-```bash
-source ~/allegro_ws/install/setup.bash
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py hand:=right
-```
-*(Optional parameters: `hand:=left`, `io_interface_descriptor:=modbus_tcp:192.168.1.100:502`)*
-
-### 7. Run Finger Wave Motion Example
-
-Open a new terminal and execute:
-
-```bash
-source ~/allegro_ws/install/setup.bash
-ros2 run allegro_hand_v6_bringup finger_wave.py
-```
+Torque is enabled automatically when the position controller starts. The GUI Servo buttons are requests only and have no physical receiver in this release.

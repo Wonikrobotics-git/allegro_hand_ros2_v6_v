@@ -4,12 +4,11 @@
 
 ## Install and verify
 
-Use Ubuntu 24.04 / ROS 2 Jazzy. Build the separately supplied base V6 release first, then follow the [repository installation instructions](../README.md) to build this UI overlay. Keep all four UI packages under `src/allegro_hand_v6_ui`. Load the following environment in each terminal:
+Use Ubuntu 24.04 / ROS 2 Jazzy and the [combined repository installation guide](../../../README.md#installation). These are **V-model camera tools**; F-model operation skips them. Complete [USB discovery, permissions, and live-image checks](docs/CAMERA_SETUP.md) first, then load this workspace in every terminal:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
 ## Capture images
@@ -28,7 +27,7 @@ Prepare the physical hand connection and device permissions first. Load the envi
 
 ```bash
 # Terminal 1: start the physical hand and controller
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right
 ```
 
 If the hand's communication address differs from the default `192.168.1.100:502`, set `io_interface_descriptor` on bringup. For example, start a right hand at `192.168.1.110` with the following command.
@@ -42,9 +41,8 @@ After the controller is active, use another terminal with the same workspace env
 ```bash
 # Terminal 2: start camera capture and automatic mapping
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
-ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=left
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
+ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=right
 ```
 
 `mapping.launch.py` runs contact-based guarded-sweep mapping by default; `mapping_sweep.launch.py` provides the same behavior and arguments. Both hands use the shared angles in `config/mapping_motion.yaml` as the reference for the preshape and sweep direction. In the default `sweep_joints:=flex` mode, the thumb and abduction joints move to the preshape, then the probed finger flexes gradually toward contact. Motion stops on contact, the tracking-error limit, or `s_max`. `hand: both` allows these poses on either hand; the launch argument `hand:=left` or `hand:=right` still identifies the mapping result and display orientation. The legacy `mapping_motion_left.yaml` and `mapping_motion_right.yaml` paths are symbolic links to the shared file, so edit the shared file once to update both hands. The mapper publishes real joint position commands; check the contact poses before running it. Motion settings load from the installed package share directory. After editing, rebuild the package or pass `motion_file:=/absolute/path/to/motion.yaml`. Custom files can also use `hand: both`; existing files with `hand: left` or `hand: right` remain specific to that hand. Wait for `DONE` and the save path, then stop capture. If it reports `FAILED` or any `UNRESOLVED` finger, check the cameras and poses and run it again.
@@ -86,6 +84,8 @@ A replacement camera may be discovered with a new serial, but the old finger ass
 ## Tests
 
 ```bash
+cd ~/allegro_hand_ros2_v6_v
+colcon build --symlink-install --packages-up-to allegro_hand_vision_sensor --cmake-args -DBUILD_TESTING=ON
 colcon test --packages-select allegro_hand_vision_sensor
 colcon test-result --test-result-base build/allegro_hand_vision_sensor --verbose
 ```

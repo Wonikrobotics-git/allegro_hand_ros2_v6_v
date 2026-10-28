@@ -1,59 +1,68 @@
 # Allegro Hand V6 Dashboard
 
-The release target is Ubuntu 24.04 / ROS 2 Jazzy. Install the matching base V6 release first, then build this UI repository as a separate workspace overlay. See the [repository README](../README.md) for installation and launch instructions. Use the same `hand` argument in bringup and dashboard; the live 3D model follows the base stack's robot description and TF.
+Display the live 3D hand, joint feedback, and available pressure readings. The V model also displays USB camera images. The dashboard monitors the hand; use the [pose GUI](../allegro_hand_v6_gui/README.md#first-pose-and-sequence) to send joint targets.
 
-`allegro_hand_v6_dashboard` shows three palm pressure channels, five vision sensors, and the RViz 3D hand model in one Qt window. C++ threads open each camera directly through udev and OpenCV/V4L2. Palm pressure is read from `/allegro_hand/tactile_pressures`; connected cameras remain visible when pressure data is absent. The `digit-interface` SDK is not required.
+## Install and Build
 
-## Install and build
-
-Use Ubuntu 24.04 / ROS 2 Jazzy. Build the separately supplied base V6 release first, then follow the [repository installation instructions](../README.md) to build this UI overlay. Keep all four UI packages under `src/allegro_hand_v6_ui`. Load the following environment in each terminal:
+Use the [complete repository installation guide](../../../README.md#installation) for Ubuntu 24.04 / ROS 2 Jazzy. The base packages and UI are already included in one workspace. In every terminal:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
-## First use: map cameras to fingers
-
-The mapping file is named `finger_serials.yaml` and contains serials for one physical hand. When it is missing or empty, the dashboard temporarily assigns detected cameras to finger cards, so placement may vary. Map the serials on the physical hand before using the dashboard:
-
-1. Connect the hand and all five cameras. Check the preshape and flexion direction in the shared `mapping_motion.yaml`. The legacy `mapping_motion_left.yaml` and `mapping_motion_right.yaml` paths are symbolic links to that file. Mapping defaults to a guarded sweep that moves real joints gradually while detecting contact. To use customized settings, pass `motion_file:=/absolute/path/to/motion.yaml` to `mapping.launch.py`.
-2. Start the hand and controller in terminal 1:
-
-   ```bash
-   source /opt/ros/jazzy/setup.bash
-   source ~/allegro_v6_ws/install/setup.bash
-   source ~/v6_ui_ws/install/setup.bash
-   ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
-   ```
-
-3. After the controller is active, start capture and sweep mapping with one command in terminal 2 on the same ROS domain. It launches `vision_sensor.launch.py` automatically, then starts the mapper after a default delay of 5 seconds. The default contact threshold is `contact_threshold:=10.0`. Separate camera capture is unnecessary:
-
-   ```bash
-   source /opt/ros/jazzy/setup.bash
-   source ~/allegro_v6_ws/install/setup.bash
-   source ~/v6_ui_ws/install/setup.bash
-   ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=left
-   ```
-
-4. Wait for `DONE` and its save path, then press `Ctrl+C` in terminal 2 to stop the mapping launch and capture. If the mapper reports `FAILED` or any `UNRESOLVED` finger, check the connections, preshape, contact response, and joint tracking error before rerunning. Confirm the YAML `hand` value and all five finger serials. For a right hand, use `right` consistently for every `hand` argument. See the [vision sensor manual](../allegro_hand_vision_sensor/README.md) for options and log explanations.
-
-The default mapping path on every PC is `${XDG_CONFIG_HOME:-~/.config}/allegro_hand_vision_sensor/finger_serials.yaml` (the home directory is used when `XDG_CONFIG_HOME` is unset). The mapper creates its parent directory. Run both launches as the same OS user with the same `XDG_CONFIG_HOME` value. For another location, pass the same `mapping_file:=/absolute/path/finger_serials.yaml` to both. Existing mappings kept in a source-tree `config/finger_serials.yaml` must be copied to the new path or supplied with `mapping_file`.
-
-## Run with a physical hand
-
-Source `/opt/ros/jazzy/setup.bash` and the workspace's `install/setup.bash` in both terminals, using the same ROS domain.
+## First Check Without Hardware
 
 ```bash
-# Terminal 1: hand, controller, robot_description, and TF
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
-
-# Terminal 2: cameras, palm pressure, and live 3D hand
-ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
+# Terminal 1
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
+  model:=v6_v hand:=right ros2_control_hardware_type:=mock_components gui:=false
 ```
 
-Start the dashboard separately. If the hand's communication address differs from the default `192.168.1.100:502`, set `io_interface_descriptor` on the bringup command; for a hand at `192.168.1.110`, pass `io_interface_descriptor:=modbus_tcp:192.168.1.110:502`. The dashboard opens the USB cameras directly, so stop the mapper's `vision_sensor_capture` and any other camera program before starting it. The mapping YAML and dashboard `hand` argument must agree. Map each different physical hand on its own PC or copy that hand’s mapping file.
+```bash
+# Terminal 2
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
+```
+
+Expect the matching 3D hand and mock joint feedback. Physical pressures require the hand. The dashboard's `hand` argument selects its 2D layout; bringup supplies the 3D model and TF. For a left hand, set `hand:=left` in both commands.
+
+## Run with a Physical Hand
+
+Follow [Ethernet and controller setup](../../allegro_hand_v6/allegro_hand_v6_bringup/README.md#hardware-setup). Stop mock bringup, then run:
+
+```bash
+# Terminal 1: connected hand and controller
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
+  model:=v6_v hand:=right ros2_control_hardware_type:=hardware \
+  io_interface_descriptor:=modbus_tcp:192.168.1.100:502 gui:=false
+```
+
+Use the hand's actual IP and side. Check `ros2 control list_controllers` and `/joint_states` before opening the dashboard.
+
+- **F model:** open the dashboard directly. Camera setup and mapping are not required.
+- **V model:** complete [camera checks](../allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) and the [mapping procedure](../allegro_hand_vision_sensor/README.md#map-cameras-to-fingers) first. That physical bringup must explicitly use `model:=v6_v`. Stop mapping and standalone capture with `Ctrl+C` before opening the dashboard; it opens the cameras directly.
+
+```bash
+# Terminal 2: after any V-model mapping/capture has stopped
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
+```
+
+Confirm the model/hand shown by the dashboard matches the connected device. For a left hand, use `hand:=left` throughout. Keep the same `ROS_DOMAIN_ID` and mapping path across applications.
+
+## Camera Assignments — V Model Only
+
+A missing mapping file can produce temporary camera placement. Verify all five finger assignments after mapping; `DONE` alone does not establish success. The default file is `$HOME/.config/allegro_hand_vision_sensor/finger_serials.yaml`, or the equivalent under an absolute `XDG_CONFIG_HOME`. Pass the same custom `mapping_file:=/absolute/path/finger_serials.yaml` to mapping and dashboard when needed. A new physical hand or replacement camera needs its own verified assignment.
+
+## Configuration and Troubleshooting
+
+See the [UI configuration table](../README.md#dashboard-configuration) for `hand`, `pressure_topic`, `mapping_file`, layouts, and view settings. The default pressure topic is `/allegro_hand/tactile_pressures` (`Float64MultiArray`).
+
+| Symptom | Checks |
+|---|---|
+| Blank/wrong 3D model | Source this workspace; verify bringup model/hand, `/robot_description`, and TF. Stop old robot-state publishers. |
+| Missing pressure readings | Check the physical connection, pressure topic/type, and any channel-layout override. |
+| Missing or misplaced V-model images | Follow [camera diagnostics](../allegro_hand_vision_sensor/docs/CAMERA_SETUP.md#troubleshooting); verify process ownership and mapping. |
+| GUI closed but hand still holds position | The dashboard does not control torque. See [ending a session](../allegro_hand_v6_gui/README.md#5-end-a-session). |
 
 ## Frame integrity
 
@@ -64,6 +73,8 @@ Adjust `vision_sensor_tear_absolute_threshold`, `vision_sensor_tear_ratio_thresh
 ## Tests and pressure layout
 
 ```bash
+cd ~/allegro_hand_ros2_v6_v
+colcon build --symlink-install --packages-up-to allegro_hand_v6_dashboard --cmake-args -DBUILD_TESTING=ON
 colcon test --packages-select allegro_hand_v6_dashboard
 colcon test-result --test-result-base build/allegro_hand_v6_dashboard --verbose
 ```

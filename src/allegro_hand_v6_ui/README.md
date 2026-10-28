@@ -2,9 +2,9 @@
 
 `allegro_hand_v6_ui` provides desktop visualization, pose control, browser monitoring, and vision-sensor tools for the five-finger, 20-joint **Allegro Hand V6**.
 
-This repository is released separately from the base V6 packages. Install and build the base release first, then build this repository in a separate ROS 2 workspace. The UI applications connect to the running V6 stack through ROS 2 topics, services, and TF. The hardware driver, robot descriptions, and bringup files remain in the base release.
+The UI packages are included in the complete **Allegro Hand V6 V** repository. Build the common, base, and UI packages together in `~/allegro_hand_ros2_v6_v`. No separate base download or UI overlay is needed. Follow the [repository installation guide](../../README.md#installation).
 
-The customer source distribution is named **allegro_hand_v6_ui** and targets **Ubuntu 24.04 / ROS 2 Jazzy**. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for delivery contents and validation scope.
+The target is **Ubuntu 24.04 / ROS 2 Jazzy**. [RELEASE_NOTES.md](RELEASE_NOTES.md) records the earlier UI-only source distribution; it is historical packaging information.
 
 ---
 
@@ -49,92 +49,33 @@ Each package has its own `package.xml`, build configuration, and README.
 
 ## Prerequisites
 
-The release target is **Ubuntu 24.04 and ROS 2 Jazzy**. The commands below use Jazzy. Use base and UI releases intended for the same ROS distribution; do not source a Humble-built base installation in a Jazzy terminal.
+- Ubuntu 24.04 with ROS 2 Jazzy Desktop, `colcon`, and initialized `rosdep`.
+- All three source trees supplied in this repository: `src/allegro_hand_common`, `src/allegro_hand_v6`, and `src/allegro_hand_v6_ui`.
+- A graphical desktop for Qt/RViz applications.
+- For V-model camera features, complete the [USB camera checks](allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) before mapping. The F model does not need camera setup.
 
-Prepare the following before building the UI:
-
-- A working installation of the separately released `allegro_hand_common` and `allegro_hand_v6` packages, including `allegro_hand_v6_bringup`, `allegro_hand_v6_description`, and `allegro_hand_v6_hardware`.
-- ROS 2 development tools, `colcon`, and initialized `rosdep`.
-- A graphical desktop for the Qt/RViz applications.
-- USB vision sensors and permission to access their video devices when camera features are required.
-
-The package manifests declare Qt 5, RViz, OpenCV, libudev, yaml-cpp, and Python dependencies. Camera capture uses OpenCV/V4L2 and udev; the external `digit-interface` SDK is not required.
+Camera capture uses OpenCV/V4L2 and udev; the external `digit-interface` SDK is not required.
 
 ## Installation and Build
 
-### 1. Prepare the Base V6 Workspace
-
-Download the base packages and follow their release instructions to install dependencies and build them. This README assumes their workspace is `~/allegro_v6_ws` and its environment file is `~/allegro_v6_ws/install/setup.bash`. Replace that path if your base installation is elsewhere.
-
-Expected workspace arrangement:
-
-```text
-~/allegro_v6_ws/                    # Base release: built independently
-├── src/
-│   ├── allegro_hand_common/
-│   └── allegro_hand_v6/
-└── install/setup.bash
-
-~/v6_ui_ws/                         # UI release: separate workspace
-└── src/
-    └── allegro_hand_v6_ui/                 # This repository, including all four packages
-```
-
-The repository can stay nested under `src/allegro_hand_v6_ui`; its packages do not need to be moved individually into `src/`.
-
-### 2. Build the UI Workspace
-
-Clone this repository using the release's repository URL, or extract its release archive, into `~/v6_ui_ws/src/allegro_hand_v6_ui`. In a new terminal:
-
-For the customer ZIP distribution, run the following from the directory containing the downloaded archive and `SHA256SUMS`:
-
-```bash
-sha256sum -c SHA256SUMS
-mkdir -p ~/v6_ui_ws/src
-unzip allegro_hand_v6_ui_jazzy_20261022.zip -d ~/v6_ui_ws/src
-```
-
-The archive already contains the top-level `allegro_hand_v6_ui/` directory. Verify the extracted source files if required:
-
-```bash
-cd ~/v6_ui_ws/src/allegro_hand_v6_ui
-sha256sum -c FILES.sha256
-```
-
-Then install dependencies and build:
+Use the [root README](../../README.md#installation) for cloning and initial dependency setup. From the already cloned repository:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-
-cd ~/v6_ui_ws
-rosdep install --from-paths src/allegro_hand_v6_ui \
-  --ignore-src --rosdistro jazzy -r -y
-
-colcon build --symlink-install --packages-select \
-  allegro_hand_vision_sensor \
-  allegro_hand_v6_dashboard \
-  allegro_hand_v6_gui \
-  allegro_hand_v6_web_plot
-
+cd ~/allegro_hand_ros2_v6_v
+rosdep install --from-paths src --ignore-src --rosdistro jazzy -r -y
+colcon build --symlink-install --executor sequential --cmake-args -DBUILD_TESTING=OFF
 source install/setup.bash
 ```
 
-If `rosdep` has never been initialized on the PC, run `sudo rosdep init` once, followed by `rosdep update`, before dependency installation.
-
-The base workspace supplies the V6 dependencies as an **underlay**. The UI workspace is an **overlay**; building it does not require copying the base packages into this repository. Installed assets are located through the ament package index, without a fixed source path or a V5 reference checkout.
-
-### 3. Load the Environment in Each Terminal
-
-Use this order in every terminal that starts a base or UI application:
+Load the following in **every terminal**:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
-Use the same `ROS_DOMAIN_ID` and compatible ROS middleware settings for all processes. The examples below assume a single hand on one PC.
+Use the same `ROS_DOMAIN_ID` in all terminals. Examples use the V model and right hand. For a left hand, use `hand:=left` consistently. Camera mapping examples explicitly use the V model, including in the F repository.
 
 ## Quick Start: Dashboard Without Hardware
 
@@ -143,16 +84,16 @@ After loading the environment in both terminals:
 ```bash
 # Terminal 1: base V6 bringup with mock joint feedback
 ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
-  model:=v6_v hand:=left \
+  model:=v6_v hand:=right \
   ros2_control_hardware_type:=mock_components gui:=false
 ```
 
 ```bash
 # Terminal 2: independently launched UI
-ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
 ```
 
-The 3D and 2D left-hand views should appear. Physical pressure readings and camera images require connected devices; mock bringup verifies model and joint-state integration.
+The 3D and 2D right-hand views should appear. Physical pressure readings and camera images require connected devices; mock bringup verifies model and joint-state integration.
 
 The dashboard's `hand` argument selects its 2D image and sensor layout. The **3D model comes from the base bringup's `/robot_description` and TF**, so specify the same hand in both commands. Use `hand:=right` in both terminals for a right hand. Select `model:=v6_f` in bringup for the F model, or `model:=v6_v` for the V model.
 
@@ -165,7 +106,7 @@ Start the base stack first, using the model, side, and communication address of 
 ```bash
 # Terminal 1: activates the physical hardware interface
 ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
-  model:=v6_v hand:=left \
+  model:=v6_v hand:=right \
   ros2_control_hardware_type:=hardware \
   io_interface_descriptor:=modbus_tcp:192.168.1.100:502 \
   gui:=false
@@ -173,10 +114,10 @@ ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
 
 ```bash
 # Terminal 2: monitoring dashboard
-ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
 ```
 
-The address above is an example; use the descriptor supported by your base release and physical connection. Start the dashboard after the base controller is active. The UI does not configure the hand's network interface or replace the hardware driver.
+The address above is an example; use the descriptor supported by your base release and physical connection. Start the dashboard after the base controller is active. For V-model cameras, complete [camera checks and mapping](allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) before starting it; F-model users skip that step. The UI does not configure the hand's network interface or replace the hardware driver.
 
 ### Dashboard Configuration
 
@@ -195,7 +136,7 @@ For example:
 
 ```bash
 ros2 launch allegro_hand_v6_dashboard dashboard.launch.py \
-  hand:=left view_distance:=0.60
+  hand:=right view_distance:=0.60
 ```
 
 The default tactile input contains 18 channels: three per finger in thumb/index/middle/ring/pinky order, followed by three palm channels. Palm wire indices 15, 16, and 17 represent the upper, middle, and bottom sensors. Use `pressure_channel_count` and `pressure_indices` when your base release supplies a different palm layout.
@@ -222,14 +163,16 @@ ros2 launch allegro_hand_vision_sensor vision_sensor.launch.py
 
 This publishes detected serials on `/vision_sensor/connected_serials` and images on `/vision_sensor/s_<serial UTF-8 hex>/image_raw`. Stop capture with `Ctrl+C` before proceeding to the dashboard.
 
-For a physical hand that has not been mapped:
+This section applies to **V-model cameras only**. F-model users skip it. Complete the [camera setup and diagnostics](allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) first.
 
-1. Connect the hand and its cameras, start physical bringup, and check that the position controller is active.
+For a physical V-model hand that has not been mapped:
+
+1. Connect the hand and its cameras, start physical bringup with `model:=v6_v` and the correct hand side, and check that the position controller is active.
 2. Review the installed `config/mapping_motion.yaml` or prepare a custom motion file. **Automatic mapping publishes real joint commands and moves the hand through contact poses.**
 3. With the dashboard closed, run:
 
    ```bash
-   ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=left
+   ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=right
    ```
 
 4. The launch starts camera capture, then guarded-sweep mapping after a default five-second delay. Wait for completion and verify that every finger is resolved. Investigate `FAILED` or `UNRESOLVED` results before relying on the assignment.
@@ -248,14 +191,18 @@ Mapping and dashboard must use the same OS user and configuration location. For 
 With the base controller running:
 
 ```bash
-mkdir -p ~/v6_poses
+mkdir -p ~/v6_poses/v_right
 ros2 run allegro_hand_v6_gui allegro_hand_v6_gui_node \
-  --ros-args -p pose_directory:=$HOME/v6_poses
+  --ros-args -p pose_directory:=$HOME/v6_poses/v_right
 ```
 
 The GUI reads `/joint_states`, saves the current 20-joint pose, sends selected poses, and runs timed pose sequences. The explicit pose directory above provides a writable location. Without an override, the GUI uses the installed package's `poses/` directory, which includes an example pose.
 
-Pose commands are published to `/allegro_hand_position_controller/commands`. Servo buttons publish `Float64MultiArray` requests to `/allegro_hand_servo_controller/commands`: `[1.0]` requests ON and `[0.0]` requests OFF. The base stack must provide a matching subscriber/controller for these requests; the GUI's requested state is not hardware feedback. The position-only base bringup does not by itself establish this servo interface. Closing the GUI stops its sequence and publishes an OFF request.
+Pose commands are published to `/allegro_hand_position_controller/commands`. Torque is enabled automatically when the position controller starts; no Servo ON button press is required.
+
+The GUI Servo buttons publish `Float64MultiArray` requests on `/allegro_hand_servo_controller/commands`, but the supplied bringup has no receiver for that topic. The **Requested** label is not device feedback. Servo OFF and GUI closure do not turn off physical torque; closing the GUI only stops future sequence publications and sends an unhandled OFF request.
+
+For a complete English workflow, follow [First pose and sequence](allegro_hand_v6_gui/README.md#first-pose-and-sequence). It covers a mock-only movement example, physical-hand prerequisites, and stopping.
 
 Use one joint-command source at a time: stop automatic mapping or another pose-sequence publisher before sending poses from this GUI.
 
@@ -287,16 +234,17 @@ ros2 control list_controllers
 ros2 topic list
 ```
 
-The dashboard should resolve to the UI workspace, while the description package should resolve to the base installation. For a blank or incorrect model, check both workspaces' setup files, matching hand/model arguments, `/robot_description`, and TF. The dashboard's `hand` argument does not change an already-running base publisher.
+Both packages should resolve under this repository's `install/` directory. For a blank or incorrect model, check the sourced workspace, matching hand/model arguments, `/robot_description`, and TF. The dashboard's `hand` argument does not change an already-running base publisher.
 
 For missing pressure readings, compare the publisher's topic and message type with the selected UI's inputs. For missing camera images, check device permissions, USB connections, serial mapping, and whether another process is using the cameras.
 
-After modifying this repository, rebuild the affected UI package, source `~/v6_ui_ws/install/setup.bash`, and restart its application. Rebuild the base workspace separately when its driver or robot descriptions change.
+After modifying this repository, rebuild from `~/allegro_hand_ros2_v6_v`, source `install/setup.bash`, and restart the affected applications.
 
 To run the dashboard tests without launching hardware-control tests from the base release:
 
 ```bash
-cd ~/v6_ui_ws
+cd ~/allegro_hand_ros2_v6_v
+colcon build --symlink-install --packages-up-to allegro_hand_v6_dashboard --cmake-args -DBUILD_TESTING=ON
 colcon test --packages-select allegro_hand_v6_dashboard
 colcon test-result --test-result-base build/allegro_hand_v6_dashboard --verbose
 ```
@@ -305,7 +253,7 @@ colcon test-result --test-result-base build/allegro_hand_v6_dashboard --verbose
 
 - [Dashboard](allegro_hand_v6_dashboard/README.md)
 - [Vision sensor capture and mapping](allegro_hand_vision_sensor/README.md)
-- [Pose control GUI — Korean](allegro_hand_v6_gui/README.md)
+- [Pose control GUI — English](allegro_hand_v6_gui/README.md)
 - [Browser monitor — Korean](allegro_hand_v6_web_plot/README.md)
 
-Refer to the separately downloaded base release's README for hardware setup, supported communication descriptors, controller configuration, and model installation.
+Refer to the [bringup guide](../allegro_hand_v6/allegro_hand_v6_bringup/README.md) for hardware setup and controller checks.

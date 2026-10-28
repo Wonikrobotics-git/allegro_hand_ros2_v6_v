@@ -1,28 +1,29 @@
 # Allegro Hand V6 대시보드
 
+최신 설치·실행 절차는 [English guide](README.md)를 기준으로 한다.
+
 ## Jazzy 설치와 실행
 
-Ubuntu 24.04 / ROS 2 Jazzy 기준. 별도 기본 V6 패키지를 먼저 빌드한 뒤 [저장소 설치 안내](../README.md)에 따라 UI 전용 워크스페이스에 설치한다. UI 패키지는 `src/allegro_hand_v6_ui` 안에 그대로 둔다. 각 터미널에서 다음 환경을 불러온다.
+Ubuntu 24.04 / ROS 2 Jazzy 통합 배포본이다. [루트 설치 안내](../../../README.md#installation)로 base와 UI를 함께 빌드한다. 각 터미널에서 동일한 환경을 불러온다.
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-source ~/allegro_v6_ws/install/setup.bash
-source ~/v6_ui_ws/install/setup.bash
+source ~/allegro_hand_ros2_v6_v/install/setup.bash
 ```
 
 두 터미널에서 위 환경을 source한 뒤 다음과 같이 실행한다. 아래 bringup은 실제 장치 없이 동작한다.
 
 ```bash
-# 터미널 1: 최신 V6 V 왼손 모델, TF, mock 관절 상태
+# 터미널 1: 최신 V6 V 오른손 모델, TF, mock 관절 상태
 ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py \
-  model:=v6_v hand:=left ros2_control_hardware_type:=mock_components gui:=false
+  model:=v6_v hand:=right ros2_control_hardware_type:=mock_components gui:=false
 
 # 터미널 2: 대시보드
-ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
 ```
 
 대시보드의 `hand`는 2D 이미지·센서 배치를 선택한다. 3D 모델은 bringup이 `/robot_description`으로
-발행하는 URDF와 TF를 사용하므로 **bringup에도 `hand:=left`를 지정해야 한다**.
+발행하는 URDF와 TF를 사용하므로 **bringup에도 `hand:=right`를 지정해야 한다**.
 `model:=v6_f`는 F 모델, `model:=v6_v`는 V 모델을 선택한다.
 대시보드 상단에 실제 수신한 모델·손 방향이 표시된다. `Waiting`은 URDF 미수신,
 `Legacy or custom URDF`는 구형 또는 별도 URDF, 손 방향 불일치 메시지는 bringup 인자 확인이 필요함을 뜻한다.
@@ -40,7 +41,9 @@ V 모델의 중간·기저 압력 채널은 해당 손가락 링크 앞면에 �
 
 `allegro_hand_v6_dashboard`는 손바닥 압력 3채널, 영상 센서 5개, RViz 3D 손 모델을 하나의 Qt 창에 표시합니다. C++ 스레드가 udev와 OpenCV/V4L2로 각 카메라를 직접 엽니다. 손바닥 압력은 `/allegro_hand/tactile_pressures`에서 읽으며 압력 데이터가 없어도 연결된 카메라 영상은 표시합니다. `digit-interface` SDK는 필요하지 않습니다.
 
-## 최초 사용: 카메라와 손가락 매핑
+## 최초 사용: 카메라와 손가락 매핑 — V 모델 전용
+
+F 모델은 이 절을 건너뛰고 대시보드를 바로 실행한다. V 모델은 먼저 [USB·권한·영상 확인](../allegro_hand_vision_sensor/docs/CAMERA_SETUP.md)을 마친다.
 
 매핑 파일 이름은 `finger_serials.yaml`이며 실제 손 한 대의 시리얼을 담습니다. 파일이 없거나 비어 있으면 대시보드가 발견한 카메라를 손가락 카드에 임시로 배치하므로 위치가 달라질 수 있습니다. 대시보드 사용 전에 실제 손에서 시리얼 대응을 만듭니다.
 
@@ -49,18 +52,16 @@ V 모델의 중간·기저 압력 채널은 해당 손가락 링크 앞면에 �
 
    ```bash
    source /opt/ros/jazzy/setup.bash
-   source ~/allegro_v6_ws/install/setup.bash
-   source ~/v6_ui_ws/install/setup.bash
-   ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
+   source ~/allegro_hand_ros2_v6_v/install/setup.bash
+   ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right
    ```
 
 3. 컨트롤러 활성화 후 같은 ROS 도메인의 터미널 2에서 다음 명령 하나로 센서 캡처와 sweep 매핑을 시작합니다. `vision_sensor.launch.py`가 자동으로 실행되고 기본 5초 뒤 매퍼가 시작됩니다. 접촉 판정 기본값은 `contact_threshold:=10.0`입니다. 별도로 센서 캡처를 실행할 필요가 없습니다.
 
    ```bash
    source /opt/ros/jazzy/setup.bash
-   source ~/allegro_v6_ws/install/setup.bash
-   source ~/v6_ui_ws/install/setup.bash
-   ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=left
+   source ~/allegro_hand_ros2_v6_v/install/setup.bash
+   ros2 launch allegro_hand_vision_sensor mapping.launch.py hand:=right
    ```
 
 4. `DONE`과 저장 경로를 확인한 뒤 터미널 2에서 `Ctrl+C`로 매핑 launch와 센서 캡처를 종료합니다. `FAILED` 또는 `UNRESOLVED` 손가락이 있으면 연결과 준비 자세, 접촉 응답, 관절 추종 오차를 확인하고 다시 실행합니다. 결과 YAML의 `hand` 값과 손가락 5개의 시리얼을 확인합니다. 오른손은 모든 `hand` 인자에 `right`를 사용합니다. 세부 옵션과 로그 해석은 [비전 센서 매뉴얼](../allegro_hand_vision_sensor/README_KR.md)을 참고합니다.
@@ -73,10 +74,10 @@ V 모델의 중간·기저 압력 채널은 해당 손가락 링크 앞면에 �
 
 ```bash
 # 터미널 1: 손, 컨트롤러, robot_description, TF
-ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=left
+ros2 launch allegro_hand_v6_bringup allegro_hand.launch.py model:=v6_v hand:=right
 
 # 터미널 2: 카메라, 손바닥 압력, 실시간 3D 손
-ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
+ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=right
 ```
 
 대시보드는 별도로 실행합니다. 손의 통신 주소가 기본값 `192.168.1.100:502`와 다르면 bringup 명령에 `io_interface_descriptor`를 지정합니다. 예를 들어 `192.168.1.110`의 손에는 `io_interface_descriptor:=modbus_tcp:192.168.1.110:502`를 전달합니다. 대시보드는 USB 카메라를 직접 열므로 매퍼의 `vision_sensor_capture`와 다른 카메라 프로그램을 먼저 종료합니다. 매핑 YAML과 대시보드의 `hand` 인자를 일치시킵니다. 서로 다른 실제 손은 각 PC에서 다시 매핑하거나 해당 손의 매핑 파일을 복사합니다.
@@ -90,6 +91,8 @@ ros2 launch allegro_hand_v6_dashboard dashboard.launch.py hand:=left
 ## 테스트와 압력 채널 설정
 
 ```bash
+cd ~/allegro_hand_ros2_v6_v
+colcon build --symlink-install --packages-up-to allegro_hand_v6_dashboard --cmake-args -DBUILD_TESTING=ON
 colcon test --packages-select allegro_hand_v6_dashboard
 colcon test-result --test-result-base build/allegro_hand_v6_dashboard --verbose
 ```
