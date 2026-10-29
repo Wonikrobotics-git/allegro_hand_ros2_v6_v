@@ -25,4 +25,3 @@ For execution, follow the [bringup guide](allegro_hand_v6_bringup/README.md). It
 - [First pose and sequence](../allegro_hand_v6_ui/allegro_hand_v6_gui/README.md#first-pose-and-sequence)
 - [CSV recording](allegro_hand_v6_bringup/CSV_LOGGING.md)
 - [V-model camera setup](../allegro_hand_v6_ui/allegro_hand_vision_sensor/docs/CAMERA_SETUP.md) — F-model users skip this.
-- [Validation record](../../VALIDATION.md) — historical results and their scope.

@@ -2,7 +2,7 @@
 
 [![ROS 2: Jazzy](https://img.shields.io/badge/ROS_2-Jazzy-22314E)](https://docs.ros.org/en/jazzy/)
 [![Ubuntu: 24.04](https://img.shields.io/badge/Ubuntu-24.04-E95420)](#installation)
-[![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-2563EB)](CHANGELOG.md)
+[![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-2563EB)](VERSION)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22C55E)](LICENSE)
 
 **Official ROS 2 software for the Allegro Hand V6 V.**
@@ -218,9 +218,8 @@ The F and V repositories share the same software and model assets. Use `model:=v
 | [UI usage](src/allegro_hand_v6_ui/README.md) | Dashboard, pose control GUI, browser monitor, and their ROS interfaces. |
 | [Dashboard manual](src/allegro_hand_v6_ui/allegro_hand_v6_dashboard/README.md) | Visualization, pressure display, layouts, and dashboard settings. |
 | [CSV recording guide](src/allegro_hand_v6/allegro_hand_v6_bringup/CSV_LOGGING.md) | Recording options, data columns, and rate checks. |
-| [Validation record](VALIDATION.md) | Recorded build and mock checks, source refreshes, and verification scope. |
 
-Version **1.0.0** uses semantic versioning and Git tags such as `v1.0.0`. See the [changelog](CHANGELOG.md) for release history.
+Version **1.0.0** uses semantic versioning and Git tags such as `v1.0.0`.
 
 ---
 

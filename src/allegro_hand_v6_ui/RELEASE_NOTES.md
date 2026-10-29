@@ -42,4 +42,4 @@ The [Jazzy and display validation record](docs/JAZZY_VALIDATION.md) documents su
 
 The customer ZIP was additionally extracted and checked for source checksums, configuration symlinks, and discovery of all four packages under `allegro_hand_v6_ui/`. All four UI packages built with Jazzy using `--symlink-install`; dashboard and vision-sensor tests reported **59 tests, 0 errors, 0 failures, and 0 skipped**.
 
-`FILES.sha256` in the extracted distribution verifies the shipped source files. The separate `SHA256SUMS` file verifies the ZIP archive before extraction. Git history, build/install/log directories, Python caches, and machine-specific camera mappings are excluded from the customer archive. Existing package license and third-party notice files are retained.
+Git history, build/install/log directories, Python caches, and machine-specific camera mappings are excluded from the customer archive. Existing package license and third-party notice files are retained.
